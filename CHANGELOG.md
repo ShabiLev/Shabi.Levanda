@@ -2,7 +2,7 @@
 
 All notable changes to the Shabi Levanda engineering portfolio are documented here.
 
-## [1.0.0] - Release candidate
+## [1.0.0] - 2026-08-14
 
 ### Added
 
@@ -15,7 +15,7 @@ All notable changes to the Shabi Levanda engineering portfolio are documented he
 - GitHub Actions CI, architecture, strategy, quality-gate and release documentation.
 - Central agent-platform project adapter at `.shabi/project.yaml`.
 
-### Release status
+### Release boundary
 
-- Source release pending draft pull request review, exact-head CI and approval.
+- Source release approved for merge after exact-head CI passes.
 - Cross-repository production deployment is not included.
