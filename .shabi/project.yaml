@@ -1,0 +1,36 @@
+schemaVersion: 1
+project:
+  name: Shabi.Levanda
+  type: [web, static-site]
+platform:
+  version: "0.2.0"
+technology:
+  frontend: [html, css, javascript]
+  backend: []
+  database: []
+capabilities:
+  browser_testing: true
+  security_testing: true
+  database_sqlserver: false
+  database_mongodb: false
+tools:
+  context7: false
+  playwright: true
+  skillui: false
+  strix: false
+  github: true
+quality:
+  unit_tests: optional
+  integration_tests: optional
+  e2e_tests: required
+  browser_verification: required
+  security_scan: required
+  independent_qa: required
+release:
+  version_update: required
+  changelog: required
+  pull_request: required
+  ci_green: required
+  post_release_verification: required
+flowproof:
+  enabled: false
