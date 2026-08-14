@@ -11,11 +11,11 @@ My background combines more than two decades in software delivery with hands-on 
 - Data Quality & Reconciliation
 - Security, Accessibility & Performance Validation
 - Engineering Leadership
-## How I Work With AI I don't use AI simply as a code generator. 
+##How I Work With AI I don't use AI simply as a code generator. 
 I use AI as part of a controlled engineering operating model: 
 **Context → Plan → Specialist Agents → Implementation → Testing → Independent Review → Evidence → Release Gate → Verification
 
-** AI agents receive explicit roles, bounded responsibilities, context and acceptance criteria. 
+**AI agents receive explicit roles, bounded responsibilities, context and acceptance criteria. 
 A task is not complete because AI says so — **completion requires evidence.** 
 
 ## Selected Engineering Work 
