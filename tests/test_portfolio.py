@@ -269,6 +269,13 @@ def test_mobile_navigation_resets_when_resized_to_desktop(browser, portfolio_bas
     toggle = page.locator("[data-menu-toggle]")
     toggle.click()
     page.set_viewport_size({"width": 1200, "height": 900})
+    page.wait_for_function(
+        """() => {
+          const toggle = document.querySelector('[data-menu-toggle]');
+          return toggle?.getAttribute('aria-expanded') === 'false'
+            && !document.body.classList.contains('menu-open');
+        }"""
+    )
     assert toggle.get_attribute("aria-expanded") == "false"
     assert "menu-open" not in (page.locator("body").get_attribute("class") or "")
     assert page.evaluate("document.body.scrollHeight > document.documentElement.clientHeight")
