@@ -8,26 +8,39 @@ python -m pytest
 
 Coverage includes:
 
-- homepage identity and semantic landmarks
-- exactly six project cards and exact repository URLs
-- resolvable internal anchors and navigation behavior
-- truthful resume state
-- keyboard entry and external-link hardening
-- WCAG A/AA axe scans on desktop and mobile
-- 400% zoom-equivalent reflow at 320 CSS pixels
-- mobile navigation with keyboard and Escape behavior
-- horizontal-overflow checks at 1440×900, 1280×720, 768×900, 390×844 and 360×800
-- browser console and local HTTP errors
-- placeholder detection in release assets
-- credential-like and local-identity public-safety patterns
+- executive identity, semantic landmarks and seven-section information architecture
+- three featured projects and four smaller public showcases
+- exact public project links and private CWL link boundary
+- functional CWL Office case-study route
+- real CV download from Header, Hero and Contact
+- skip-link focus, external-link hardening and accessible labels
+- mobile menu keyboard operation, Escape, scroll lock and resize reset
+- axe WCAG 2.0/2.1/2.2 A/AA scans on landing and case-study routes
+- reduced-motion behavior and 320px / 400%-equivalent reflow
+- responsive widths at 320, 375, 390, 430, 768, 1024, 1280 and 1440
+- browser console, page error and local resource checks
+- recursive placeholder, credential, phone, local-path and private-CWL-URL scans
+- local-link resolution across every deployable HTML file
+- minimum binary-size checks for portrait, social image and PDF
 
-The suite intentionally does not request third-party project URLs. Their existence and factual content are reviewed separately so CI remains deterministic.
+The deterministic CI suite does not request third-party URLs. External repository and case-study availability is audited separately and recorded with the release evidence.
 
 ## Manual gate
 
-Review the actual browser at all five target sizes and record visual hierarchy, content density, navigation, focus visibility, project stacking, touch targets, workflow adaptation, contact and resume behavior, console errors, readable contrast and zoom behavior.
+Review both routes in real Chromium at the responsive matrix above. Record:
 
-Automated checks do not replace manual accessibility expert review, screen-reader coverage or production deployment verification.
+- first-screen identity and CTA hierarchy
+- portrait treatment and project hierarchy
+- keyboard order, focus visibility, Escape and menu focus restoration
+- touch-target usability and absence of clipping/overlap
+- natural scrolling and reduced-motion behavior
+- CWL confidentiality and absence of private links/data
+- CV visual output and download response
+- console/network errors
+
+Run Lighthouse against the repository-owned server and record Performance, Accessibility, Best Practices and SEO scores.
+
+Automated checks do not replace manual screen-reader or physical-device coverage; any gap must remain explicit.
 
 ## Release decision
 
