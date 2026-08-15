@@ -10,11 +10,11 @@ The portfolio positions Shabi as a **Quality & Release Engineering Leader** and 
 
 The site is intentionally static and dependency-light:
 
-- semantic seven-section `index.html`
-- sanitized `projects/cwl-office/index.html` case study
+- authored English and Hebrew seven-section landing routes (`/` and `/he/`)
+- sanitized English and Hebrew CWL Office case studies
 - responsive `styles.css`
 - small progressive-enhancement `script.js`
-- repository-owned portrait, social image and downloadable CV
+- repository-owned portrait, social image and verified two-page English CV
 - Python, pytest and Playwright quality gate
 - GitHub Actions CI against a repository-owned local server
 
@@ -40,7 +40,7 @@ In a second terminal with the virtual environment active:
 python -m pytest
 ```
 
-The suite owns a deterministic local server when `PORTFOLIO_BASE_URL` is not set. It verifies the executive information architecture, selected and supporting projects, CWL case study, CV download, exact repository links, navigation, semantic landmarks, axe WCAG checks, keyboard behavior, reduced motion, eight responsive widths, 400% reflow equivalence, resource loading, internal links and recursive public-safety patterns. External URL availability is reviewed separately so CI does not depend on third-party uptime.
+The suite owns a deterministic local server when `PORTFOLIO_BASE_URL` is not set. It verifies both languages and both case-study routes, RTL/LTR behavior, language switches, project links, CV delivery, structural spacing, axe WCAG checks, keyboard behavior, reduced motion, nine responsive widths, resource loading, internal links and recursive public-safety patterns. External URL availability is reviewed separately so CI does not depend on third-party uptime.
 
 ## CI
 
@@ -58,7 +58,7 @@ This release does not write to or deploy across repositories. Deployment require
 - Public project claims are sourced from public GitHub documentation.
 - No analytics, tracking, cookies, credentials, customer data or private repository content.
 - Release assets are scanned for placeholder and credential-like patterns.
-- The v1.1 CV is generated from an auditable repository-owned HTML source using only intentionally public facts and contact channels. The legacy PDF and phone number are excluded.
+- The v1.1 English CV is generated from an auditable repository-owned HTML source using verified historical/public facts and approved public contact channels. The source DOCX and phone number are excluded.
 - CWL Office is represented through a sanitized case study with no private repository link, source code, tenant information, production configuration or screenshots.
 - External links opened in a new tab use `noopener noreferrer`.
 

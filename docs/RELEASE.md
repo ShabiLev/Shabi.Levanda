@@ -21,14 +21,14 @@ Stage 13.1 prepares portfolio version `v1.1.0`. A tag or GitHub Release must not
 
 ## CV release boundary
 
-The v1.1 CV is generated from `assets/cv/Shabi-Levanda-CV.html` and published at `assets/cv/Shabi-Levanda-CV.pdf`. It contains only facts and contact channels already intentionally public in the authoritative `Shabi-Resume/index.html` source. The legacy PDF is not reused.
+The RC2 English CV is generated from `assets/cv/Shabi-Levanda-CV-EN.html` and published at `assets/cv/Shabi-Levanda-CV-EN.pdf`. It is an intentional two-page artifact derived from the inspected historical source and current public engineering evidence. The source DOCX, phone number and stronger unsupported metrics are not published. A Hebrew PDF remains a documented follow-up; the Hebrew website links clearly to the English CV.
 
 See [CV provenance](CV_PROVENANCE.md).
 
 ## Source release flow
 
 1. Validate and independently review `feature/landing-page-v1.1`.
-2. Push the feature branch and open a draft pull request to `main`.
+2. Push the feature branch and update the existing draft pull request #2 to `main`.
 3. Confirm every required check against the exact head SHA.
 4. Resolve findings and rerun the complete gate.
 5. Obtain human approval before merging.

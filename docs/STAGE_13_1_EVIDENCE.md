@@ -1,80 +1,82 @@
-# Stage 13.1 verification evidence
+# Stage 13.1 RC2 verification evidence
 
-Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Exact-head CI evidence is added to the pull request after the branch is pushed.
+Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Exact-head CI evidence is added to pull request #2 after the RC2 commits are pushed.
 
 ## Automated gate
 
 | Check | Command | Result |
 | --- | --- | --- |
-| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 80 tests |
+| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 157 tests |
 | Project adapter | `.\.venv\Scripts\shabi.exe validate` | PASS |
 | Whitespace | `git diff --check` | PASS; line-ending warnings only |
-| Signature scan | `rg` over the repository, excluding Git, the virtual environment and binary assets | PASS — no credential, private-key, MongoDB URI or local-user-path signatures |
+| Signature scan | `rg` for private-key, credential, MongoDB URI, phone and local-user-path signatures, excluding Git, the virtual environment, test results and binary assets | PASS — no matches |
 
-The pytest suite includes real Chromium coverage for the landing page and CWL Office case study, axe WCAG 2.2 A/AA checks, keyboard/menu behavior, CV delivery, extracted-PDF privacy checks, one-page/section-integrity validation, local links, console errors, resource responses and responsive reflow.
+The pytest suite exercises all four authored routes in real Chromium: English and Hebrew landing pages plus both CWL Office case studies. Coverage includes axe WCAG 2.2 A/AA, `lang`/`dir` and reciprocal `hreflang`, Hebrew UI leakage, keyboard menus and focus restoration, reduced motion, CV delivery and extracted-PDF privacy, exact two-page CV integrity, local assets, console/resource failures and responsive reflow.
 
-## Responsive and browser review
+## Responsive, RTL and browser review
 
-Both routes were inspected at 320, 375, 390, 430, 768, 1024, 1280 and 1440 CSS pixels. The checks found no document-level horizontal overflow, clipped CTAs, console errors or failed local resources.
+English and Hebrew landing pages were rendered and screenshot-reviewed at 360, 390, 768, 1024, 1280 and 1440 CSS pixels. Automated coverage additionally includes 320, 375 and 430 pixels and both CWL routes. No route produced document-level horizontal overflow, clipped CTAs, console errors or failed local resources.
 
-Manual keyboard review confirmed:
+Measured landing content-to-content gaps are identical in LTR and RTL:
 
-- the skip link becomes visible and moves focus to `main-content`;
-- all sampled interactive elements show a 3px solid focus indicator;
-- the mobile menu opens from the keyboard;
-- Escape closes the menu and restores focus to the menu button;
-- reduced-motion emulation computes `scroll-behavior: auto`;
-- CWL section navigation wraps on mobile and every link remains visible;
-- the CWL mobile header retains a compact CV action.
+- desktop 1440px: 173–195px across all six transitions;
+- mobile 390px: 94–126px across all six transitions.
 
-Reviewed captures:
+Keyboard review in both languages confirmed that the menu opens with Enter, exposes the localized close label, closes with Escape and restores focus to the toggle. The automated suite also verifies the visible skip link, focus transfer to `main-content`, focus styling and `scroll-behavior: auto` under reduced-motion emulation.
 
-- [Landing page — 1440px](evidence/landing-desktop-1440.jpg)
-- [Landing page — 390px](evidence/landing-mobile-390.jpg)
-- [CWL Office case study — 1280px](evidence/cwl-case-study-desktop-1280.jpg)
-- [CWL Office case study — 390px](evidence/cwl-case-study-mobile-390.jpg)
+Reviewed release captures:
+
+- [English landing — desktop](evidence/landing-en-desktop.jpg)
+- [English landing — mobile](evidence/landing-en-mobile.jpg)
+- [Hebrew landing — desktop RTL](evidence/landing-he-desktop.jpg)
+- [Hebrew landing — mobile RTL](evidence/landing-he-mobile.jpg)
+- [English CWL Office case study](evidence/cwl-en.jpg)
+- [Hebrew CWL Office case study](evidence/cwl-he.jpg)
+
+## CV artifact
+
+The English CV is generated from the repository-owned HTML source. The final PDF is 83,780 bytes and exactly two intentional A4 pages. `pypdf` extracts and privacy-scans each page; page 1 contains Cello and Terminal X, while page 2 contains Cellebrite, Elbit, selected engineering projects, governed AI engineering, technology, professional development, languages, service and the `02 / 02` footer. PyMuPDF measures 125.6pt bottom clearance on page 1 and 20.6pt on page 2, above the enforced 18pt safe-area minimum.
+
+Both actual PDF pages were rasterized after final generation and visually inspected. Titles, sections and footers are visible and unclipped:
+
+- [CV page 1](evidence/cv-en-page-1.png)
+- [CV page 2](evidence/cv-en-page-2.png)
+
+The requested `SHABI LEVANDA(1).docx` was not found. Provenance, the inspected fallback source hash, accepted facts and excluded private/unsupported content are recorded in [CV provenance](CV_PROVENANCE.md). A Hebrew PDF remains an explicit follow-up; every Hebrew CV action clearly identifies and downloads the verified English artifact.
 
 ## Lighthouse
 
-Lighthouse 13.4.1 ran against the repository-owned local server in headless Chromium.
+Lighthouse 13.4.1 ran against a repository-owned local HTTP server in headless Chromium.
 
-| Route | Performance | Accessibility | Best Practices | SEO | FCP | LCP | CLS | TBT |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `/` | 100 | 100 | 100 | 100 | 0.9s | 1.8s | 0 | 0ms |
-| `/projects/cwl-office/` | 100 | 100 | 100 | 100 | 0.9s | 1.1s | 0 | 0ms |
+| Route | Performance | Accessibility | Best Practices | SEO |
+| --- | ---: | ---: | ---: | ---: |
+| `/` | 99 | 100 | 100 | 92 |
+| `/he/` | 100 | 100 | 100 | 92 |
+| `/projects/cwl-office/` | 100 | 100 | 100 | 91 |
+| `/he/projects/cwl-office/` | 100 | 100 | 100 | 91 |
 
-These are local artifact results, not production-deployment evidence.
+SEO is intentionally below 100 because Stage 13.1 has no approved production URL and therefore does not publish speculative canonical URLs. These are local artifact results, not production-deployment evidence.
 
 ## External-link audit
 
-`curl.exe` followed redirects and returned HTTP 200 for all 12 public repository and supporting-document targets used by the portfolio:
+The 2026-08-15 live audit returned HTTP 200 for the GitHub profile and every linked public repository and supporting case-study/document target. LinkedIn returned its expected automation-blocking HTTP 999; the URL matches the approved public source. No live-demo URL is claimed, and CWL Office has no private or future-`main` repository link.
 
-- FlowProof repository and architecture
-- Agentic Engineering Platform repository and portfolio case study
-- QA Release Command Center repository and portfolio case study
-- Shabi's AI Academy repository and portfolio case study
-- Quality Engineering Playwright Framework repository and case study
-- Multi-Tenant Data Quality Pipeline repository and case study
+## Privacy and factual boundaries
 
-No live-demo URL is claimed. CWL Office has no public repository link.
-
-## Privacy and factual review
-
-- The CWL Office page contains no private repository URL, code, customer or tenant identity, database name, connection information, production screenshot or internal configuration.
-- The CV was generated from an auditable HTML source using intentionally public career facts and contact channels. The legacy phone-bearing PDF was not reused.
-- The generated PDF was rasterized and visually inspected as the actual one-page artifact; all sections and the privacy footer are visible without a split or clipping.
-- The portrait is the exact public image embedded in the authoritative resume landing page; no synthetic replacement was created.
-- FlowProof copy reflects the public repository and does not present the local v2.2.0 release candidate as a public release.
+- Both CWL pages exclude private repository URLs, customer or tenant identities, database/collection names, connection information, production screenshots and internal configuration.
+- The CV and site exclude the source phone number, local source paths and stronger metrics found only in an older document.
+- Superseded one-page CV files were removed; the gate rejects common local and international Israeli mobile-number formats across deployable text and extracted PDF content.
+- AI wording is constrained to supported prompt contracts, scoped context, bounded specialist orchestration, deterministic evaluation, independent QA, evidence and accountable release gates. It does not claim autonomous production agents, RAG/memory, model tuning, formal certification or regulatory compliance.
+- FlowProof links to the actual public `flowproof-ai-release-gate` repository and does not present the local v2.2.0 release candidate as public-main truth.
 - No analytics, trackers, cookies, environment files or third-party runtime assets were added.
 
 ## Independent review
 
-The independent UI/UX and accessibility reviewer issued GO with no Critical, High or Medium findings. Two Low observations—mobile CWL navigation discoverability and cross-page CV consistency—were remediated with wrapping navigation, a compact mobile CV action and a browser regression test.
-
-Independent QA/security/privacy findings and the exact-head CI outcome are recorded in the pull request release gate.
+Independent UI/UX/RTL, factual/AI, privacy and Senior QA re-reviews all issued GO after their findings were remediated. Senior QA independently confirmed 20.624pt page-2 footer clearance and 35 blank raster rows below the final content. Exact-head GitHub Actions is still required after push before the RC2 source gate can issue final GO.
 
 ## Remaining boundaries
 
 - Manual screen-reader and physical-device testing were not performed.
-- Production deployment is outside Stage 13.1; canonical production metadata and post-deployment smoke evidence remain intentionally absent.
-- Tag `v1.1.0` must not be created until an approved merge and post-merge verification.
+- A professionally reviewed Hebrew PDF was not produced; the Hebrew site intentionally links to the English CV.
+- Production deployment, canonical production metadata and post-deployment smoke evidence are outside Stage 13.1.
+- No merge, tag or release is authorized by this evidence. Tag `v1.1.0` must wait for approved merge and post-merge verification.

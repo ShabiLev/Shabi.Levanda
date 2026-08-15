@@ -2,18 +2,20 @@
 
 ## Decision
 
-The portfolio remains a dependency-light static site: semantic HTML, a shared responsive design system and a small progressive-enhancement script. Stage 13.1 adds one public-safe case-study route without introducing a runtime framework.
+The portfolio remains a dependency-light static site: authored semantic HTML, one shared logical-property design system and a small progressive-enhancement script. RC2 uses parallel static language routes instead of runtime translation or an i18n framework.
 
 ```text
 Browser
   -> index.html (seven-section executive landing page)
   -> projects/cwl-office/index.html (sanitized case study)
+  -> he/index.html (authored Hebrew RTL landing page)
+  -> he/projects/cwl-office/index.html (sanitized Hebrew RTL case study)
   -> styles.css (shared tokens and responsive presentation)
   -> script.js (header and accessible mobile navigation)
   -> assets/
        -> portrait and social image
-       -> cv/Shabi-Levanda-CV.html (auditable source)
-       -> cv/Shabi-Levanda-CV.pdf (download artifact)
+       -> cv/Shabi-Levanda-CV-EN.html (auditable source)
+       -> cv/Shabi-Levanda-CV-EN.pdf (two-page download artifact)
 ```
 
 ## Information architecture
@@ -25,7 +27,7 @@ The landing page has seven top-level content sections:
 3. More Projects
 4. About & Leadership
 5. Experience & Impact
-6. Governed AI Engineering
+6. AI Engineering & Prompt Systems
 7. Contact
 
 The header and footer frame these sections. Deep technical detail stays in public repository documentation or the dedicated CWL Office case study.
@@ -35,8 +37,9 @@ The header and footer frame these sections. Deep technical detail stays in publi
 ```text
 Repository-owned HTTP target
   -> pytest + Playwright browser checks
-  -> axe WCAG A/AA checks on both routes
-  -> eight-width responsive matrix and 320px reflow
+  -> axe WCAG A/AA checks on all four routes
+  -> nine-width responsive LTR/RTL matrix and 320px reflow
+  -> computed section-rhythm assertions
   -> CV, resource and internal-link verification
   -> recursive public-safety scan
   -> Lighthouse and manual keyboard/visual review
@@ -57,4 +60,4 @@ Tests start an ephemeral local server by default. CI starts the same static targ
 
 ## Accessibility and resilience
 
-Both routes use native landmarks, one `h1`, ordered headings, native links and buttons, visible focus, a skip link and reduced-motion support. The mobile menu has explicit expanded state, Escape handling, scroll locking, focus restoration and desktop-breakpoint reset.
+All four routes use native landmarks, one `h1`, ordered headings, native links and buttons, visible focus, a skip link and reduced-motion support. The mobile menu has localized expanded-state labels, Escape handling, scroll locking, focus restoration and desktop-breakpoint reset. Hebrew routes use native document RTL plus logical CSS properties and explicit direction isolation for mixed technical content.
