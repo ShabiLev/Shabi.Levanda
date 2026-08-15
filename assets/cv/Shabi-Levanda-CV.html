@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shabi Levanda — Curriculum Vitae</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #52606c;
+        --gold: #9b7438;
+        --teal: #286e70;
+        --line: #d8d4ca;
+        --paper: #fffefb;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #ece9e2;
+        color: var(--ink);
+        font: 10.2pt/1.42 Aptos, "Segoe UI", Arial, sans-serif;
+      }
+      a { color: var(--teal); text-decoration: none; }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 12mm auto;
+        padding: 17mm 18mm;
+        background: var(--paper);
+        box-shadow: 0 8px 32px rgb(0 0 0 / 12%);
+      }
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16mm;
+        padding-bottom: 8mm;
+        border-bottom: 2px solid var(--gold);
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 {
+        margin-bottom: 2mm;
+        font: 700 28pt/1.05 Georgia, "Times New Roman", serif;
+        letter-spacing: -0.02em;
+      }
+      .positioning {
+        margin: 0;
+        color: var(--teal);
+        font-size: 12pt;
+        font-weight: 700;
+      }
+      .contact {
+        align-self: center;
+        color: var(--muted);
+        font-size: 8.7pt;
+        line-height: 1.75;
+        text-align: right;
+      }
+      .summary {
+        margin: 7mm 0 0;
+        color: var(--muted);
+        font-size: 10.7pt;
+      }
+      .principle {
+        margin: 5mm 0 0;
+        padding-left: 4mm;
+        border-left: 2px solid var(--teal);
+        color: var(--ink);
+        font: 600 11pt/1.4 Georgia, "Times New Roman", serif;
+      }
+      section { margin-top: 8mm; }
+      h2 {
+        margin-bottom: 4mm;
+        color: var(--gold);
+        font-size: 9pt;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h3 {
+        margin-bottom: 1.5mm;
+        font-size: 10.4pt;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2mm;
+      }
+      .metric {
+        padding: 4mm;
+        border: 1px solid var(--line);
+      }
+      .metric strong {
+        display: block;
+        color: var(--teal);
+        font: 700 18pt/1 Georgia, "Times New Roman", serif;
+      }
+      .metric span {
+        display: block;
+        margin-top: 2mm;
+        color: var(--muted);
+        font-size: 8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .two-column {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 9mm;
+      }
+      .role {
+        display: grid;
+        grid-template-columns: 27mm 1fr;
+        gap: 4mm;
+        padding: 3.2mm 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .role time {
+        color: var(--gold);
+        font: 700 8pt/1.4 Consolas, monospace;
+      }
+      .role p { margin: 0; color: var(--muted); font-size: 9pt; }
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .skills li {
+        padding: 3mm;
+        border: 1px solid var(--line);
+        font-size: 8.5pt;
+        font-weight: 700;
+      }
+      .project {
+        margin-bottom: 4mm;
+        padding-bottom: 4mm;
+        border-bottom: 1px solid var(--line);
+      }
+      .project:last-child { margin-bottom: 0; }
+      .project p { margin: 0; color: var(--muted); font-size: 8.8pt; }
+      .project a { display: inline-block; margin-top: 1.5mm; font-size: 8pt; font-weight: 700; }
+      .training p { margin: 0; color: var(--muted); }
+      footer {
+        margin-top: 8mm;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 7.5pt;
+      }
+
+      @media (max-width: 800px) {
+        .page { width: 100%; min-height: auto; margin: 0; padding: 28px 22px; }
+        header, .two-column { grid-template-columns: 1fr; gap: 18px; }
+        .contact { text-align: left; }
+        .metrics { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @page { size: A4; margin: 0; }
+      @media print {
+        body { background: var(--paper); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        .page { margin: 0; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div>
+          <h1>Shabi Levanda</h1>
+          <p class="positioning">Quality &amp; Release Engineering Leader<br />AI &amp; Agentic Systems Builder</p>
+        </div>
+        <div class="contact">
+          <a href="mailto:shabi231@gmail.com">shabi231@gmail.com</a><br />
+          <a href="https://www.linkedin.com/in/shabi-levanda/">linkedin.com/in/shabi-levanda</a><br />
+          <a href="https://github.com/ShabiLev">github.com/ShabiLev</a>
+        </div>
+      </header>
+
+      <p class="summary">
+        Software quality leader with 22+ years in high-tech and more than a decade leading QA,
+        release quality, Agile processes, automation and product-focused delivery. Combines strategic
+        leadership with hands-on investigation, data analysis, test architecture and engineering systems.
+      </p>
+      <p class="principle">Build fast. Verify independently. Release with evidence.</p>
+
+      <section aria-labelledby="impact-title">
+        <h2 id="impact-title">Verified impact</h2>
+        <div class="metrics">
+          <div class="metric"><strong>22+</strong><span>Years in high-tech</span></div>
+          <div class="metric"><strong>10+</strong><span>Years QA leadership</span></div>
+          <div class="metric"><strong>20%</strong><span>Cycle-time improvement</span></div>
+          <div class="metric"><strong>40–50%</strong><span>Defect / data error reduction</span></div>
+        </div>
+      </section>
+
+      <div class="two-column">
+        <section aria-labelledby="experience-cv-title">
+          <h2 id="experience-cv-title">Experience</h2>
+          <article class="role">
+            <time>2024—Present</time><div><h3>Quality Assurance Manager · Cello</h3><p>Quality strategy, release readiness, technical investigation and cross-functional delivery.</p></div>
+          </article>
+          <article class="role">
+            <time>2021—2023</time><div><h3>Quality Assurance Manager · Terminal X</h3><p>QA leadership across web, mobile, backend, data quality and product delivery.</p></div>
+          </article>
+          <article class="role">
+            <time>2013—2021</time><div><h3>Quality Assurance Manager · Cellebrite</h3><p>Team leadership, release quality, Agile processes, automation and enterprise testing.</p></div>
+          </article>
+          <article class="role">
+            <time>2001—2013</time><div><h3>System Engineer · Elbit</h3><p>System engineering, specifications, integration, testing and customer support.</p></div>
+          </article>
+        </section>
+
+        <section aria-labelledby="capabilities-cv-title">
+          <h2 id="capabilities-cv-title">Core capabilities</h2>
+          <ul class="skills">
+            <li>Quality Engineering</li><li>Release Governance</li><li>QA Strategy</li
+            ><li>Automation Platforms</li><li>Data Quality</li><li>CI/CD Gates</li
+            ><li>AI Engineering</li><li>Technical Leadership</li>
+          </ul>
+
+          <div class="training">
+            <h2>Technology</h2>
+            <p>Python · pytest · Playwright · Selenium · Appium · REST APIs · SQL Server · MongoDB · GitHub Actions · Jira · Xray · Confluence</p>
+          </div>
+
+          <div class="training">
+            <h2>Professional development</h2>
+            <p><strong>Python Automation Full-Stack</strong><br />QA Experts College</p>
+          </div>
+        </section>
+      </div>
+
+      <section aria-labelledby="systems-cv-title">
+        <h2 id="systems-cv-title">Selected engineering systems</h2>
+        <div class="two-column">
+          <div>
+            <article class="project">
+              <h3>FlowProof</h3>
+              <p>Evidence-driven AI release assurance connecting risk, checks, independent review and deterministic release decisions.</p>
+              <a href="https://github.com/ShabiLev/flowproof-ai-release-gate">github.com/ShabiLev/flowproof-ai-release-gate</a>
+            </article>
+            <article class="project">
+              <h3>CWL Office</h3>
+              <p>Private-source, read-only multi-tenant operations and data workspace with dynamic discovery and guarded queries.</p>
+            </article>
+          </div>
+          <div>
+            <article class="project">
+              <h3>Agentic Engineering Platform</h3>
+              <p>Public reference architecture for governed AI-assisted engineering, independent QA, evidence and release gates.</p>
+              <a href="https://github.com/ShabiLev/agentic-engineering-platform">github.com/ShabiLev/agentic-engineering-platform</a>
+            </article>
+            <article class="project">
+              <h3>Public engineering portfolio</h3>
+              <p>Additional release, automation and data-quality showcases are available on GitHub.</p>
+              <a href="https://github.com/ShabiLev">github.com/ShabiLev</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        Public portfolio CV · Contact details intentionally limited to verified public channels · Updated August 2026
+      </footer>
+    </main>
+  </body>
+</html>
