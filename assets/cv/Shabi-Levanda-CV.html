@@ -133,14 +133,6 @@
         font-size: 8.5pt;
         font-weight: 700;
       }
-      .project {
-        margin-bottom: 4mm;
-        padding-bottom: 4mm;
-        border-bottom: 1px solid var(--line);
-      }
-      .project:last-child { margin-bottom: 0; }
-      .project p { margin: 0; color: var(--muted); font-size: 8.8pt; }
-      .project a { display: inline-block; margin-top: 1.5mm; font-size: 8pt; font-weight: 700; }
       .training p { margin: 0; color: var(--muted); }
       footer {
         margin-top: 8mm;
@@ -159,8 +151,39 @@
 
       @page { size: A4; margin: 0; }
       @media print {
-        body { background: var(--paper); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-        .page { margin: 0; box-shadow: none; }
+        body {
+          background: var(--paper);
+          font-size: 9.2pt;
+          line-height: 1.3;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        .page {
+          width: 210mm;
+          height: 297mm;
+          min-height: 0;
+          margin: 0;
+          padding: 11mm 14mm 9mm;
+          overflow: hidden;
+          box-shadow: none;
+        }
+        header { gap: 10mm; padding-bottom: 5mm; }
+        h1 { font-size: 25pt; }
+        .positioning { font-size: 10.5pt; }
+        .contact { font-size: 8pt; line-height: 1.55; }
+        .summary { margin-top: 4.5mm; font-size: 9.5pt; }
+        .principle { margin-top: 3mm; font-size: 10pt; }
+        section { margin-top: 5mm; }
+        h2 { margin-bottom: 2.5mm; }
+        .metric { padding: 2.6mm; }
+        .metric strong { font-size: 16pt; }
+        .metric span { margin-top: 1mm; font-size: 7.3pt; }
+        .two-column { gap: 7mm; }
+        .role { padding: 2.2mm 0; }
+        .role p { font-size: 8.3pt; }
+        .skills { gap: 1.5mm; }
+        .skills li { padding: 2mm; font-size: 7.8pt; }
+        footer { margin-top: 2mm; padding-top: 2mm; }
       }
     </style>
   </head>
@@ -231,35 +254,6 @@
           </div>
         </section>
       </div>
-
-      <section aria-labelledby="systems-cv-title">
-        <h2 id="systems-cv-title">Selected engineering systems</h2>
-        <div class="two-column">
-          <div>
-            <article class="project">
-              <h3>FlowProof</h3>
-              <p>Evidence-driven AI release assurance connecting risk, checks, independent review and deterministic release decisions.</p>
-              <a href="https://github.com/ShabiLev/flowproof-ai-release-gate">github.com/ShabiLev/flowproof-ai-release-gate</a>
-            </article>
-            <article class="project">
-              <h3>CWL Office</h3>
-              <p>Private-source, read-only multi-tenant operations and data workspace with dynamic discovery and guarded queries.</p>
-            </article>
-          </div>
-          <div>
-            <article class="project">
-              <h3>Agentic Engineering Platform</h3>
-              <p>Public reference architecture for governed AI-assisted engineering, independent QA, evidence and release gates.</p>
-              <a href="https://github.com/ShabiLev/agentic-engineering-platform">github.com/ShabiLev/agentic-engineering-platform</a>
-            </article>
-            <article class="project">
-              <h3>Public engineering portfolio</h3>
-              <p>Additional release, automation and data-quality showcases are available on GitHub.</p>
-              <a href="https://github.com/ShabiLev">github.com/ShabiLev</a>
-            </article>
-          </div>
-        </div>
-      </section>
 
       <footer>
         Public portfolio CV · Contact details intentionally limited to verified public channels · Updated August 2026

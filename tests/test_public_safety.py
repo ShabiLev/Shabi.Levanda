@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 import pytest
+from pypdf import PdfReader
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +61,8 @@ PUBLIC_SAFETY_PATTERNS = {
 
 
 def release_content(path: Path) -> str:
+    if path.suffix.casefold() == ".pdf":
+        return "\n".join(page.extract_text() or "" for page in PdfReader(path).pages)
     return path.read_bytes().decode("utf-8", errors="ignore")
 
 
@@ -89,6 +92,24 @@ def test_required_binary_assets_exist_and_are_nontrivial():
     for path, minimum_size in expected_sizes.items():
         assert path.is_file(), f"Missing release asset: {path.relative_to(ROOT)}"
         assert path.stat().st_size > minimum_size, f"Release asset is unexpectedly small: {path.relative_to(ROOT)}"
+
+
+@pytest.mark.static
+def test_cv_pdf_is_one_page_and_contains_the_verified_source_sections():
+    pdf_path = ROOT / "assets" / "cv" / "Shabi-Levanda-CV.pdf"
+    reader = PdfReader(pdf_path)
+    assert len(reader.pages) == 1, "The public CV must render as one intentional A4 page"
+
+    text = (reader.pages[0].extract_text() or "").casefold()
+    for expected in (
+        "Quality & Release Engineering Leader",
+        "Verified impact",
+        "Core capabilities",
+        "Data Quality",
+        "Professional development",
+        "Public portfolio CV",
+    ):
+        assert expected.casefold() in text, f"Missing or clipped CV section: {expected}"
 
 
 @pytest.mark.static

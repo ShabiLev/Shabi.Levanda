@@ -6,12 +6,12 @@ Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Exact-head CI e
 
 | Check | Command | Result |
 | --- | --- | --- |
-| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 77 tests |
+| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 80 tests |
 | Project adapter | `.\.venv\Scripts\shabi.exe validate` | PASS |
 | Whitespace | `git diff --check` | PASS; line-ending warnings only |
 | Signature scan | `rg` over the repository, excluding Git, the virtual environment and binary assets | PASS — no credential, private-key, MongoDB URI or local-user-path signatures |
 
-The pytest suite includes real Chromium coverage for the landing page and CWL Office case study, axe WCAG 2.2 A/AA checks, keyboard/menu behavior, CV delivery, local links, console errors, resource responses, privacy rules and responsive reflow.
+The pytest suite includes real Chromium coverage for the landing page and CWL Office case study, axe WCAG 2.2 A/AA checks, keyboard/menu behavior, CV delivery, extracted-PDF privacy checks, one-page/section-integrity validation, local links, console errors, resource responses and responsive reflow.
 
 ## Responsive and browser review
 
@@ -62,6 +62,7 @@ No live-demo URL is claimed. CWL Office has no public repository link.
 
 - The CWL Office page contains no private repository URL, code, customer or tenant identity, database name, connection information, production screenshot or internal configuration.
 - The CV was generated from an auditable HTML source using intentionally public career facts and contact channels. The legacy phone-bearing PDF was not reused.
+- The generated PDF was rasterized and visually inspected as the actual one-page artifact; all sections and the privacy footer are visible without a split or clipping.
 - The portrait is the exact public image embedded in the authoritative resume landing page; no synthetic replacement was created.
 - FlowProof copy reflects the public repository and does not present the local v2.2.0 release candidate as a public release.
 - No analytics, trackers, cookies, environment files or third-party runtime assets were added.

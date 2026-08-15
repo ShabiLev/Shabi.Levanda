@@ -22,6 +22,7 @@ Coverage includes:
 - recursive placeholder, credential, phone, local-path and private-CWL-URL scans
 - local-link resolution across every deployable HTML file
 - minimum binary-size checks for portrait, social image and PDF
+- real PDF text extraction, privacy scanning, one-page count and section-integrity checks
 
 The deterministic CI suite does not request third-party URLs. External repository and case-study availability is audited separately and recorded with the release evidence.
 
