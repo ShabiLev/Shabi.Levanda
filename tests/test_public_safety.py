@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 import pytest
+import pymupdf
 from pypdf import PdfReader
 
 
@@ -55,7 +56,7 @@ PUBLIC_SAFETY_PATTERNS = {
     "bearer credential": re.compile(r"Bearer\s+[A-Za-z0-9._~-]{12,}", re.I),
     "credential assignment": re.compile(r"(?:password|secret)\s*=", re.I),
     "local Windows identity": re.compile(r"ShabiLevanda-Cello", re.I),
-    "legacy phone number": re.compile(r"054[- ]?9999720"),
+    "Israeli mobile phone number": re.compile(r"(?:\+972[-\s]?|0)5\d(?:[-\s]?\d){7}"),
     "private CWL repository URL": re.compile(r"github\.com/ShabiLev/CWL-Office", re.I),
 }
 
@@ -87,7 +88,7 @@ def test_required_binary_assets_exist_and_are_nontrivial():
     expected_sizes = {
         ROOT / "assets" / "shabi-levanda-portrait.jpg": 50_000,
         ROOT / "assets" / "og-image.png": 20_000,
-        ROOT / "assets" / "cv" / "Shabi-Levanda-CV.pdf": 50_000,
+        ROOT / "assets" / "cv" / "Shabi-Levanda-CV-EN.pdf": 70_000,
     }
     for path, minimum_size in expected_sizes.items():
         assert path.is_file(), f"Missing release asset: {path.relative_to(ROOT)}"
@@ -95,21 +96,49 @@ def test_required_binary_assets_exist_and_are_nontrivial():
 
 
 @pytest.mark.static
-def test_cv_pdf_is_one_page_and_contains_the_verified_source_sections():
-    pdf_path = ROOT / "assets" / "cv" / "Shabi-Levanda-CV.pdf"
-    reader = PdfReader(pdf_path)
-    assert len(reader.pages) == 1, "The public CV must render as one intentional A4 page"
+def test_legacy_cv_artifacts_are_not_deployable():
+    assert not (ROOT / "assets" / "cv" / "Shabi-Levanda-CV.html").exists()
+    assert not (ROOT / "assets" / "cv" / "Shabi-Levanda-CV.pdf").exists()
 
-    text = (reader.pages[0].extract_text() or "").casefold()
+
+@pytest.mark.static
+@pytest.mark.parametrize(
+    "phone",
+    ["054-9999720", "054 999 9720", "0549999720", "+972-54-9999720", "+972 54 999 9720"],
+)
+def test_israeli_mobile_phone_variants_are_rejected(phone):
+    assert PUBLIC_SAFETY_PATTERNS["Israeli mobile phone number"].search(phone)
+
+
+@pytest.mark.static
+def test_english_cv_pdf_is_exactly_two_complete_pages():
+    pdf_path = ROOT / "assets" / "cv" / "Shabi-Levanda-CV-EN.pdf"
+    reader = PdfReader(pdf_path)
+    assert len(reader.pages) == 2, "The RC2 English CV must render as exactly two intentional A4 pages"
+
+    page_text = [(page.extract_text() or "").casefold() for page in reader.pages]
+    assert "cello" in page_text[0] and "terminal x" in page_text[0]
+    assert "cellebrite" in page_text[1] and "elbit systems" in page_text[1]
+    text = "\n".join(page_text)
     for expected in (
         "Quality & Release Engineering Leader",
-        "Verified impact",
-        "Core capabilities",
-        "Data Quality",
+        "Selected impact",
+        "Selected engineering projects",
+        "AI & agentic engineering",
         "Professional development",
-        "Public portfolio CV",
+        "02 / 02",
     ):
         assert expected.casefold() in text, f"Missing or clipped CV section: {expected}"
+
+    document = pymupdf.open(pdf_path)
+    minimum_bottom_clearance_points = 18
+    for page_number, page in enumerate(document, start=1):
+        content_bottom = max(block[3] for block in page.get_text("blocks") if block[4].strip())
+        clearance = page.rect.height - content_bottom
+        assert clearance >= minimum_bottom_clearance_points, (
+            f"CV page {page_number} has only {clearance:.1f}pt bottom clearance; "
+            f"expected at least {minimum_bottom_clearance_points}pt"
+        )
 
 
 @pytest.mark.static
@@ -157,6 +186,42 @@ def test_metadata_and_verified_contact_allowlist():
 
 
 @pytest.mark.static
+@pytest.mark.parametrize(
+    "relative_path,language,direction",
+    [
+        ("index.html", "en", "ltr"),
+        ("he/index.html", "he", "rtl"),
+        ("projects/cwl-office/index.html", "en", "ltr"),
+        ("he/projects/cwl-office/index.html", "he", "rtl"),
+    ],
+)
+def test_bilingual_routes_have_language_direction_and_hreflang_metadata(relative_path, language, direction):
+    html = (ROOT / relative_path).read_text(encoding="utf-8")
+    assert f'<html lang="{language}" dir="{direction}">' in html
+    assert 'hreflang="en"' in html
+    assert 'hreflang="he"' in html
+    assert 'hreflang="x-default"' in html
+    assert 'property="og:locale"' in html
+    assert 'rel="canonical"' not in html
+
+
+@pytest.mark.static
+@pytest.mark.parametrize("relative_path", ["he/index.html", "he/projects/cwl-office/index.html"])
+def test_hebrew_routes_do_not_leak_english_interface_copy(relative_path):
+    html = (ROOT / relative_path).read_text(encoding="utf-8")
+    for untranslated_label in (
+        "Selected work",
+        "More engineering work",
+        "About & leadership",
+        "Experience & impact",
+        "Download CV",
+        "View Project",
+        "Return to selected work",
+    ):
+        assert untranslated_label not in html
+
+
+@pytest.mark.static
 def test_cwl_case_study_contains_only_the_public_boundary():
     html = (ROOT / "projects" / "cwl-office" / "index.html").read_text(encoding="utf-8")
     assert "Private Source" in html
@@ -166,3 +231,8 @@ def test_cwl_case_study_contains_only_the_public_boundary():
     assert "github.com/ShabiLev/CWL-Office" not in html
     assert "mongodb+srv" not in html.casefold()
     assert "screenshot" in html.casefold()
+
+    hebrew_html = (ROOT / "he" / "projects" / "cwl-office" / "index.html").read_text(encoding="utf-8")
+    assert "גבול הסודיות" in hebrew_html
+    assert "github.com/ShabiLev/CWL-Office" not in hebrew_html
+    assert "mongodb+srv" not in hebrew_html.casefold()

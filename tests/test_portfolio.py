@@ -16,6 +16,7 @@ EXPECTED_PUBLIC_PROJECTS = {
 }
 VIEWPORTS = [
     (320, 800),
+    (360, 800),
     (375, 812),
     (390, 844),
     (430, 900),
@@ -40,6 +41,47 @@ def test_homepage_identity_and_executive_information_architecture(loaded_page):
     assert page.locator("main").count() == 1
     assert page.locator("footer").count() == 1
     assert page.get_by_role("navigation", name="Primary navigation").count() == 1
+
+
+@pytest.mark.browser
+def test_hebrew_homepage_is_authored_rtl_and_matches_information_architecture(browser, portfolio_base_url):
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    page.goto(f"{portfolio_base_url}/he/", wait_until="networkidle")
+    assert page.locator("html").get_attribute("lang") == "he"
+    assert page.locator("html").get_attribute("dir") == "rtl"
+    assert page.get_by_role("heading", name="שבי לבנדה", exact=True).count() == 1
+    assert page.locator(".hero-role").get_by_text("מוביל הנדסת איכות ושחרורים", exact=False).is_visible()
+    assert page.get_by_text("פלט של AI אינו הוכחת השלמה", exact=False).is_visible()
+    assert page.locator("main > section").count() == 7
+    assert page.locator("h1").count() == 1
+    page.close()
+
+
+@pytest.mark.browser
+@pytest.mark.parametrize(
+    "path,current_lang,target_href",
+    [("/", "en", "he/"), ("/he/", "he", "../index.html")],
+)
+def test_language_switch_is_reciprocal_and_exposes_current_language(
+    browser, portfolio_base_url, path, current_lang, target_href
+):
+    page = browser.new_page(viewport={"width": 1440, "height": 900})
+    page.goto(f"{portfolio_base_url}{path}", wait_until="networkidle")
+    switcher = page.locator(".language-switch").first
+    assert switcher.is_visible()
+    assert switcher.locator(f'a[lang="{current_lang}"][aria-current="page"]').count() == 1
+    assert page.locator(f'a[href="{target_href}"]').count() >= 1
+    page.close()
+
+
+@pytest.mark.browser
+def test_ai_engineering_story_has_four_verified_capabilities_and_compact_flow(loaded_page):
+    section = loaded_page.locator("#ai-engineering")
+    assert section.locator(".ai-capabilities article").count() == 4
+    for heading in ("Prompt Engineering", "Context Engineering", "Agentic Engineering", "Evaluation & Governance"):
+        assert section.get_by_role("heading", name=heading, exact=True).count() == 1
+    assert section.locator(".ai-flow li").count() == 8
+    assert section.get_by_text("AI output is not evidence of completion", exact=False).is_visible()
 
 
 @pytest.mark.browser
@@ -76,7 +118,7 @@ def test_internal_anchors_resolve_and_navigation_scrolls(loaded_page):
 @pytest.mark.browser
 def test_cv_download_is_real_and_available_from_required_locations(loaded_page, portfolio_base_url):
     page = loaded_page
-    expected_path = "assets/cv/Shabi-Levanda-CV.pdf"
+    expected_path = "assets/cv/Shabi-Levanda-CV-EN.pdf"
     assert page.locator(".header-cv").get_attribute("href") == expected_path
     assert page.locator(".hero-actions").get_by_role("link", name="Download CV", exact=False).get_attribute("href") == expected_path
     assert page.locator("#contact").get_by_role("link", name="Download CV", exact=False).get_attribute("href") == expected_path
@@ -86,6 +128,16 @@ def test_cv_download_is_real_and_available_from_required_locations(loaded_page, 
     assert response.status == 200
     assert response.headers.get("content-type") == "application/pdf"
     assert len(response.body()) > 50_000
+
+
+@pytest.mark.browser
+def test_hebrew_cv_actions_use_the_approved_english_artifact(browser, portfolio_base_url):
+    page = browser.new_page(viewport={"width": 390, "height": 844})
+    page.goto(f"{portfolio_base_url}/he/", wait_until="networkidle")
+    expected_path = "../assets/cv/Shabi-Levanda-CV-EN.pdf"
+    assert page.locator(f'a[href="{expected_path}"][download]').count() >= 3
+    assert page.get_by_role("link", name="קורות חיים EN", exact=False).first.is_visible()
+    page.close()
 
 
 @pytest.mark.browser
@@ -103,13 +155,27 @@ def test_cwl_case_study_is_public_safe_and_functional(browser, portfolio_base_ur
 
 
 @pytest.mark.browser
+def test_hebrew_cwl_case_study_is_rtl_public_safe_and_functional(browser, portfolio_base_url):
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    response = page.goto(f"{portfolio_base_url}/he/projects/cwl-office/", wait_until="networkidle")
+    assert response and response.status == 200
+    assert page.locator("html").get_attribute("lang") == "he"
+    assert page.locator("html").get_attribute("dir") == "rtl"
+    assert page.get_by_role("heading", name="CWL Office", exact=True).count() == 1
+    assert page.get_by_text("גבול הסודיות", exact=True).is_visible()
+    assert page.locator('a[href*="github.com/ShabiLev/CWL-Office"]').count() == 0
+    assert page.locator("main section[id]").count() == 7
+    page.close()
+
+
+@pytest.mark.browser
 def test_cwl_mobile_header_and_section_navigation_remain_visible(browser, portfolio_base_url):
     page = browser.new_page(viewport={"width": 390, "height": 844})
     page.goto(f"{portfolio_base_url}/projects/cwl-office/", wait_until="networkidle")
 
     cv_link = page.locator(".header-cv")
     assert cv_link.is_visible()
-    assert cv_link.get_attribute("href") == "../../assets/cv/Shabi-Levanda-CV.pdf"
+    assert cv_link.get_attribute("href") == "../../assets/cv/Shabi-Levanda-CV-EN.pdf"
 
     viewport_width = page.evaluate("window.innerWidth")
     for link in page.locator(".case-study-nav a").all():
@@ -118,6 +184,23 @@ def test_cwl_mobile_header_and_section_navigation_remain_visible(browser, portfo
         assert box["x"] >= 0
         assert box["x"] + box["width"] <= viewport_width
 
+    page.close()
+
+
+@pytest.mark.browser
+def test_hebrew_cwl_mobile_cv_label_and_vertical_flow_direction(browser, portfolio_base_url):
+    page = browser.new_page(viewport={"width": 390, "height": 844})
+    page.goto(f"{portfolio_base_url}/he/projects/cwl-office/", wait_until="networkidle")
+
+    cv_link = page.locator(".header-cv")
+    assert cv_link.is_visible()
+    assert cv_link.get_attribute("aria-label") == "הורדת קורות חיים באנגלית"
+    assert {"CV", "EN"}.issubset(set(cv_link.inner_text().split()))
+
+    arrow_content = page.locator(".architecture-flow div").first.evaluate(
+        "element => getComputedStyle(element, '::after').content"
+    )
+    assert "↓" in arrow_content
     page.close()
 
 
@@ -160,6 +243,25 @@ def test_mobile_navigation_keyboard_escape_and_scroll_lock(browser, portfolio_ba
 
 
 @pytest.mark.browser
+def test_hebrew_mobile_navigation_keyboard_escape_focus_and_rtl_order(browser, portfolio_base_url):
+    page = browser.new_page(viewport={"width": 390, "height": 844})
+    page.goto(f"{portfolio_base_url}/he/", wait_until="networkidle")
+    toggle = page.locator("[data-menu-toggle]")
+    assert toggle.get_attribute("aria-label") == "פתיחת תפריט הניווט"
+    toggle.focus()
+    page.keyboard.press("Enter")
+    assert toggle.get_attribute("aria-expanded") == "true"
+    assert page.get_by_role("navigation", name="ניווט במובייל").is_visible()
+    first_link = page.locator("[data-mobile-nav] a").first
+    first_link.focus()
+    assert first_link.inner_text() == "עבודות נבחרות"
+    page.keyboard.press("Escape")
+    assert toggle.get_attribute("aria-expanded") == "false"
+    assert page.evaluate("document.activeElement === document.querySelector('[data-menu-toggle]')")
+    page.close()
+
+
+@pytest.mark.browser
 def test_mobile_navigation_resets_when_resized_to_desktop(browser, portfolio_base_url):
     page = browser.new_page(viewport={"width": 390, "height": 844})
     page.goto(portfolio_base_url, wait_until="networkidle")
@@ -173,7 +275,7 @@ def test_mobile_navigation_resets_when_resized_to_desktop(browser, portfolio_bas
 
 
 @pytest.mark.browser
-@pytest.mark.parametrize("path", ["/", "/projects/cwl-office/"])
+@pytest.mark.parametrize("path", ["/", "/he/", "/projects/cwl-office/", "/he/projects/cwl-office/"])
 @pytest.mark.parametrize("viewport", [{"width": 1440, "height": 900}, {"width": 390, "height": 844}])
 def test_wcag_22_axe_has_no_violations(browser, portfolio_base_url, path, viewport):
     page = browser.new_page(viewport=viewport)
@@ -193,13 +295,14 @@ def test_wcag_22_axe_has_no_violations(browser, portfolio_base_url, path, viewpo
 
 
 @pytest.mark.browser
-def test_reduced_motion_and_400_percent_equivalent_reflow(browser, portfolio_base_url):
+@pytest.mark.parametrize("path", ["/", "/he/"])
+def test_reduced_motion_and_400_percent_equivalent_reflow(browser, portfolio_base_url, path):
     context = browser.new_context(
         viewport={"width": 320, "height": 800},
         reduced_motion="reduce",
     )
     page = context.new_page()
-    page.goto(portfolio_base_url, wait_until="networkidle")
+    page.goto(f"{portfolio_base_url}{path}", wait_until="networkidle")
     assert page.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth")
     assert page.evaluate("getComputedStyle(document.documentElement).scrollBehavior") == "auto"
     assert page.locator("#contact").is_visible()
@@ -207,35 +310,40 @@ def test_reduced_motion_and_400_percent_equivalent_reflow(browser, portfolio_bas
 
 
 @pytest.mark.browser
+@pytest.mark.parametrize("path", ["/", "/he/", "/projects/cwl-office/", "/he/projects/cwl-office/"])
 @pytest.mark.parametrize("width,height", VIEWPORTS)
-def test_homepage_responsive_matrix_has_no_overflow_or_runtime_errors(
-    browser, portfolio_base_url, width, height
+def test_bilingual_route_matrix_has_no_overflow_or_runtime_errors(
+    browser, portfolio_base_url, path, width, height
 ):
     page = browser.new_page(viewport={"width": width, "height": height})
     errors = []
     page.on("console", lambda message: errors.append(message.text) if message.type == "error" else None)
     page.on("pageerror", lambda error: errors.append(str(error)))
-    page.goto(portfolio_base_url, wait_until="networkidle")
+    page.goto(f"{portfolio_base_url}{path}", wait_until="networkidle")
     assert page.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth")
-    assert page.locator("#top h1").is_visible()
-    assert page.get_by_role("heading", name="Multi-Tenant Data Quality Pipeline").is_visible()
+    assert page.locator("h1").is_visible()
     assert not errors
     page.close()
 
 
 @pytest.mark.browser
-@pytest.mark.parametrize("width,height", [(390, 844), (1280, 900)])
-def test_case_study_responsive_matrix_has_no_overflow_or_runtime_errors(
-    browser, portfolio_base_url, width, height
+@pytest.mark.parametrize("path", ["/", "/he/"])
+@pytest.mark.parametrize("viewport,max_gap", [({"width": 1440, "height": 900}, 210), ({"width": 390, "height": 844}, 150)])
+def test_top_level_section_rhythm_has_no_viewport_sized_blank_region(
+    browser, portfolio_base_url, path, viewport, max_gap
 ):
-    page = browser.new_page(viewport={"width": width, "height": height})
-    errors = []
-    page.on("console", lambda message: errors.append(message.text) if message.type == "error" else None)
-    page.on("pageerror", lambda error: errors.append(str(error)))
-    page.goto(f"{portfolio_base_url}/projects/cwl-office/", wait_until="networkidle")
-    assert page.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth")
-    assert page.get_by_role("heading", name="Make uncertainty explicit").is_visible()
-    assert not errors
+    page = browser.new_page(viewport=viewport)
+    page.goto(f"{portfolio_base_url}{path}", wait_until="networkidle")
+    gaps = page.evaluate(
+        """() => {
+          const sections = [...document.querySelectorAll('main > section')];
+          const boxes = sections.map(section => section.querySelector(':scope > .shell').getBoundingClientRect());
+          return boxes.slice(0, -1).map((box, index) => Math.round(boxes[index + 1].top - box.bottom));
+        }"""
+    )
+    assert len(gaps) == 6
+    assert min(gaps) >= 70
+    assert max(gaps) <= max_gap, gaps
     page.close()
 
 
