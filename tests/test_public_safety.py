@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import html as html_lib
 import re
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -222,6 +223,42 @@ def test_hebrew_routes_do_not_leak_english_interface_copy(relative_path):
 
 
 @pytest.mark.static
+def test_hebrew_editorial_copy_uses_natural_israeli_technology_language():
+    landing = (ROOT / "he" / "index.html").read_text(encoding="utf-8")
+    case_study = (ROOT / "he" / "projects" / "cwl-office" / "index.html").read_text(encoding="utf-8")
+    combined = f"{landing}\n{case_study}"
+    visible_copy = html_lib.unescape(re.sub(r"<[^>]+>", "", combined))
+    assert "Multi&#8209;Tenant" in case_study
+
+    for literal_or_awkward_phrase in (
+        "ממשל שחרורים",
+        "שערי שחרור",
+        "עבודות נבחרות",
+        "עבודות נוספות",
+        "Showcases ציבוריים ממוקדים",
+        "מקור פרטי",
+        "בטוח לפרסום",
+        "להישאר קרוב למערכת",
+        "ראיות הנדסיות",
+        "פלט של AI אינו הוכחת השלמה",
+    ):
+        assert literal_or_awkward_phrase not in visible_copy
+
+    for approved_phrase in (
+        "ניהול תהליכי Release",
+        "פרויקטים נבחרים",
+        "להישאר Hands-on",
+        "הנדסת AI — מעבר לכתיבת פרומפטים",
+        "ניהול הידע, ההנחיות, מבנה הפרויקט והגבולות",
+        "סוכני AI ייעודיים",
+        "תוצר של AI אינו הוכחה שהעבודה הושלמה",
+        "סקירה הנדסית מותאמת לפרסום",
+        "Repository פרטי",
+    ):
+        assert approved_phrase in visible_copy
+
+
+@pytest.mark.static
 def test_cwl_case_study_contains_only_the_public_boundary():
     html = (ROOT / "projects" / "cwl-office" / "index.html").read_text(encoding="utf-8")
     assert "Private Source" in html
@@ -233,6 +270,6 @@ def test_cwl_case_study_contains_only_the_public_boundary():
     assert "screenshot" in html.casefold()
 
     hebrew_html = (ROOT / "he" / "projects" / "cwl-office" / "index.html").read_text(encoding="utf-8")
-    assert "גבול הסודיות" in hebrew_html
+    assert "מה נשאר מחוץ לעמוד" in hebrew_html
     assert "github.com/ShabiLev/CWL-Office" not in hebrew_html
     assert "mongodb+srv" not in hebrew_html.casefold()

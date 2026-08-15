@@ -13,6 +13,7 @@ Coverage includes:
 - exact public project links and private CWL link boundary
 - functional English and Hebrew CWL Office case-study routes
 - authored Hebrew RTL landing content, reciprocal language controls and hreflang metadata
+- natural Israeli technology terminology, rejected literal-translation phrases, English-CV clarity and non-breaking mixed-direction terms
 - real CV download from Header, Hero and Contact
 - skip-link focus, external-link hardening and accessible labels
 - mobile menu keyboard operation, Escape, scroll lock and resize reset
@@ -40,6 +41,7 @@ Review all four routes in real Chromium at the responsive matrix above. Record:
 - CWL confidentiality and absence of private links/data
 - CV visual output and download response
 - authored Hebrew quality, mixed-direction text, RTL focus/navigation order and bilingual consistency
+- separate native-Hebrew senior technology editorial approval after the final copy is frozen
 - console/network errors
 
 Run Lighthouse against the repository-owned server and record Performance, Accessibility, Best Practices and SEO scores.

@@ -50,8 +50,9 @@ def test_hebrew_homepage_is_authored_rtl_and_matches_information_architecture(br
     assert page.locator("html").get_attribute("lang") == "he"
     assert page.locator("html").get_attribute("dir") == "rtl"
     assert page.get_by_role("heading", name="שבי לבנדה", exact=True).count() == 1
-    assert page.locator(".hero-role").get_by_text("מוביל הנדסת איכות ושחרורים", exact=False).is_visible()
-    assert page.get_by_text("פלט של AI אינו הוכחת השלמה", exact=False).is_visible()
+    assert page.locator(".hero-role").get_by_text("Quality & Release Engineering Leader", exact=False).is_visible()
+    assert page.get_by_text("תוצר של AI אינו הוכחה שהעבודה הושלמה", exact=False).is_visible()
+    assert page.locator(".hero-actions").get_by_text("CV באנגלית", exact=False).is_visible()
     assert page.locator("main > section").count() == 7
     assert page.locator("h1").count() == 1
     page.close()
@@ -136,7 +137,7 @@ def test_hebrew_cv_actions_use_the_approved_english_artifact(browser, portfolio_
     page.goto(f"{portfolio_base_url}/he/", wait_until="networkidle")
     expected_path = "../assets/cv/Shabi-Levanda-CV-EN.pdf"
     assert page.locator(f'a[href="{expected_path}"][download]').count() >= 3
-    assert page.get_by_role("link", name="קורות חיים EN", exact=False).first.is_visible()
+    assert page.get_by_role("link", name="הורדת קורות החיים באנגלית", exact=True).first.is_visible()
     page.close()
 
 
@@ -162,7 +163,7 @@ def test_hebrew_cwl_case_study_is_rtl_public_safe_and_functional(browser, portfo
     assert page.locator("html").get_attribute("lang") == "he"
     assert page.locator("html").get_attribute("dir") == "rtl"
     assert page.get_by_role("heading", name="CWL Office", exact=True).count() == 1
-    assert page.get_by_text("גבול הסודיות", exact=True).is_visible()
+    assert page.get_by_text("מה נשאר מחוץ לעמוד", exact=True).is_visible()
     assert page.locator('a[href*="github.com/ShabiLev/CWL-Office"]').count() == 0
     assert page.locator("main section[id]").count() == 7
     page.close()
@@ -194,7 +195,7 @@ def test_hebrew_cwl_mobile_cv_label_and_vertical_flow_direction(browser, portfol
 
     cv_link = page.locator(".header-cv")
     assert cv_link.is_visible()
-    assert cv_link.get_attribute("aria-label") == "הורדת קורות חיים באנגלית"
+    assert cv_link.get_attribute("aria-label") == "הורדת קורות החיים באנגלית"
     assert {"CV", "EN"}.issubset(set(cv_link.inner_text().split()))
 
     arrow_content = page.locator(".architecture-flow div").first.evaluate(
@@ -254,7 +255,7 @@ def test_hebrew_mobile_navigation_keyboard_escape_focus_and_rtl_order(browser, p
     assert page.get_by_role("navigation", name="ניווט במובייל").is_visible()
     first_link = page.locator("[data-mobile-nav] a").first
     first_link.focus()
-    assert first_link.inner_text() == "עבודות נבחרות"
+    assert first_link.inner_text() == "פרויקטים נבחרים"
     page.keyboard.press("Escape")
     assert toggle.get_attribute("aria-expanded") == "false"
     assert page.evaluate("document.activeElement === document.querySelector('[data-menu-toggle]')")

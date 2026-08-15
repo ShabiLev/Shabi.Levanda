@@ -13,6 +13,7 @@ All notable changes to the Shabi Levanda engineering portfolio are documented he
 - RC2 tightens the shared section rhythm to remove accidental viewport-sized whitespace.
 - Rebuilt the English CV as a richer, intentionally structured two-page A4 document.
 - Expanded the AI section across Prompt, Context, Agentic Engineering, Evaluation and Governance.
+- Rewrote the Hebrew landing page and CWL Office case study as native Israeli technology copy, with scoped English terminology and corrected RTL/BiDi punctuation.
 
 ### Added
 
@@ -25,6 +26,7 @@ All notable changes to the Shabi Levanda engineering portfolio are documented he
 - Authored Hebrew RTL landing and CWL Office case-study routes with reciprocal language navigation and hreflang metadata.
 - Two-page PDF page-count, extracted-text, section-integrity and privacy regression checks.
 - Structural layout assertions across English/Hebrew routes and a nine-width responsive matrix including 360px.
+- Hebrew editorial regression coverage, unique project-link accessible names and an independent native-Hebrew editor GO gate.
 
 ### Release status
 

@@ -6,7 +6,7 @@ Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Pull request #2
 
 | Check | Command | Result |
 | --- | --- | --- |
-| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 157 tests |
+| Portfolio suite | `.\.venv\Scripts\python.exe -m pytest -q` | PASS — 160 tests |
 | Project adapter | `.\.venv\Scripts\shabi.exe validate` | PASS |
 | Whitespace | `git diff --check` | PASS; line-ending warnings only |
 | Signature scan | `rg` for private-key, credential, MongoDB URI, phone and local-user-path signatures, excluding Git, the virtual environment, test results and binary assets | PASS — no matches |
@@ -32,6 +32,15 @@ Reviewed release captures:
 - [Hebrew landing — mobile RTL](evidence/landing-he-mobile.jpg)
 - [English CWL Office case study](evidence/cwl-en.jpg)
 - [Hebrew CWL Office case study](evidence/cwl-he.jpg)
+- [Hebrew CWL Office case study — mobile RTL](evidence/cwl-he-mobile.jpg)
+
+## HEBREW EDITORIAL REVIEW
+
+- **Strings reviewed:** every visible string in `/he/index.html` and `/he/projects/cwl-office/`, including metadata and OpenGraph copy, navigation, buttons, project cards, experience and AI sections, footer text, image alternatives, privacy language and ARIA labels.
+- **Corrections made:** rewrote literal translations into natural Israeli technology Hebrew; clarified the English CV CTA; replaced hybrid Hero and CWL sentences; corrected mixed-direction punctuation and line order with scoped `bdi`; prevented `Multi‑Tenant` from splitting; added unique contextual names to repeated project links; and standardized public/private-source language without adding facts.
+- **Terminology decisions:** retained established terms where they are clearer to Israeli engineering readers, including `Quality Engineering`, `Release`, `Prompt Engineering`, `Context Engineering`, `Agentic Engineering`, `AI`, `Production`, `Multi‑Tenant`, `Read-only`, `Repository` and `Case Study`; used natural Hebrew explanations around them rather than mechanical noun-for-noun translation. Engineering evidence is described as verification results, test outputs or findings according to context, not automatically as legalistic "ראיות".
+- **Remaining concerns:** only optional Low polish remains: one repeated form of "מוגדר", one use of "בדיקות Responsive", two legacy ASCII hyphen forms in the experience section, an older but accurate Twitter summary and the phrase "כתובות Production" in the CWL confidentiality boundary. The independent editor confirmed that none is unnatural enough to block release, changes professional meaning or creates a BiDi defect.
+- **Result:** **GO** from the separate native-Hebrew senior technology editor after remediation and a second read-only review of the frozen source plus exact-current desktop/mobile screenshots. No Critical, High or Medium editorial findings remain.
 
 ## CV artifact
 
@@ -50,7 +59,7 @@ Lighthouse 13.4.1 ran against a repository-owned local HTTP server in headless C
 
 | Route | Performance | Accessibility | Best Practices | SEO |
 | --- | ---: | ---: | ---: | ---: |
-| `/` | 99 | 100 | 100 | 92 |
+| `/` | 100 | 100 | 100 | 92 |
 | `/he/` | 100 | 100 | 100 | 92 |
 | `/projects/cwl-office/` | 100 | 100 | 100 | 91 |
 | `/he/projects/cwl-office/` | 100 | 100 | 100 | 91 |
@@ -72,7 +81,7 @@ The 2026-08-15 live audit returned HTTP 200 for the GitHub profile and every lin
 
 ## Independent review
 
-Independent UI/UX/RTL, factual/AI, privacy and Senior QA re-reviews all issued GO after their findings were remediated. Senior QA independently confirmed 20.624pt page-2 footer clearance and 35 blank raster rows below the final content. The PR source gate may issue GO only while GitHub Actions is successful on its exact current head.
+Independent UI/UX/RTL, Hebrew editorial, factual/AI, privacy and Senior QA re-reviews all issued GO after their findings were remediated. Senior QA independently confirmed 20.624pt page-2 footer clearance and 35 blank raster rows below the final content. The PR source gate may issue GO only while GitHub Actions is successful on its exact current head.
 
 ## Remaining boundaries
 
