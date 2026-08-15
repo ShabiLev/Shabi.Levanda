@@ -7,7 +7,9 @@ const setMenuState = (open, { restoreFocus = false } = {}) => {
   if (!menuToggle || !mobileNavigation) return;
 
   menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+  const openLabel = menuToggle.dataset.menuOpenLabel || "Open navigation menu";
+  const closeLabel = menuToggle.dataset.menuCloseLabel || "Close navigation menu";
+  menuToggle.setAttribute("aria-label", open ? closeLabel : openLabel);
   mobileNavigation.classList.toggle("open", open);
   header?.classList.toggle("menu-active", open);
   document.body.classList.toggle("menu-open", open);

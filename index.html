@@ -10,7 +10,12 @@
     />
     <meta name="theme-color" content="#090d12" />
     <meta name="color-scheme" content="dark" />
+    <link rel="alternate" hreflang="en" href="index.html" />
+    <link rel="alternate" hreflang="he" href="he/" />
+    <link rel="alternate" hreflang="x-default" href="index.html" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="he_IL" />
     <meta property="og:title" content="Shabi Levanda | Quality &amp; Release Engineering Leader" />
     <meta
       property="og:description"
@@ -48,6 +53,11 @@
           ><a href="#ai-engineering">AI Engineering</a><a href="#contact">Contact</a>
         </nav>
         <div class="header-actions">
+          <nav class="language-switch desktop-language" aria-label="Language selection">
+            <a href="index.html" hreflang="en" lang="en" aria-current="page">EN</a>
+            <span aria-hidden="true">|</span>
+            <a href="he/" hreflang="he" lang="he" dir="rtl">עברית</a>
+          </nav>
           <a
             class="icon-link desktop-social"
             href="https://github.com/ShabiLev"
@@ -56,7 +66,7 @@
             aria-label="Shabi Levanda on GitHub (opens in a new tab)"
             >GitHub ↗</a
           >
-          <a class="button button-primary header-cv" href="assets/cv/Shabi-Levanda-CV.pdf" download
+          <a class="button button-primary header-cv" href="assets/cv/Shabi-Levanda-CV-EN.pdf" download
             >Download CV <span aria-hidden="true">↓</span></a
           >
           <button
@@ -65,6 +75,8 @@
             aria-expanded="false"
             aria-controls="mobile-navigation"
             aria-label="Open navigation menu"
+            data-menu-open-label="Open navigation menu"
+            data-menu-close-label="Close navigation menu"
             data-menu-toggle
           >
             <span></span><span></span><span></span>
@@ -74,7 +86,8 @@
       <nav id="mobile-navigation" class="mobile-nav" aria-label="Mobile navigation" data-mobile-nav>
         <a href="#work">Work</a><a href="#about">About</a><a href="#experience">Experience</a
         ><a href="#ai-engineering">AI Engineering</a><a href="#contact">Contact</a
-        ><a href="assets/cv/Shabi-Levanda-CV.pdf" download>Download CV ↓</a>
+        ><a href="assets/cv/Shabi-Levanda-CV-EN.pdf" download>Download CV ↓</a
+        ><a class="mobile-language" href="he/" hreflang="he" lang="he" dir="rtl">עברית</a>
       </nav>
     </header>
 
@@ -95,7 +108,7 @@
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#work">View Selected Work</a>
-              <a class="button button-secondary" href="assets/cv/Shabi-Levanda-CV.pdf" download
+              <a class="button button-secondary" href="assets/cv/Shabi-Levanda-CV-EN.pdf" download
                 >Download CV <span aria-hidden="true">↓</span></a
               >
             </div>
@@ -157,7 +170,7 @@
               <ul class="project-points">
                 <li>Continuous assurance and explicit release gates</li>
                 <li>Verifiable evidence packages and independent review</li>
-                <li>Risk-aware, deterministic GO / GO WITH CONDITIONS / NO-GO decisions</li>
+                <li>Risk-aware, deterministic GO / GO_WITH_CONDITIONS / NO_GO decisions</li>
               </ul>
               <div class="tag-list" aria-label="FlowProof capabilities">
                 <span>Release governance</span><span>Risk analysis</span><span>Evidence</span
@@ -247,7 +260,7 @@
           </div>
           <div class="more-grid">
             <article class="project-card">
-              <p class="project-kicker">Production-Style Showcase</p><h3>QA Release Command Center</h3>
+              <p class="project-kicker">Release-Governance Showcase</p><h3>QA Release Command Center</h3>
               <p>
                 An offline-first, bilingual workspace that turns risks, defects, regression scope,
                 sign-offs and Go/No-Go decisions into an inspectable readiness model.
@@ -282,8 +295,8 @@
             <article class="project-card">
               <p class="project-kicker">Public Reference Architecture</p><h3>Multi-Tenant Data Quality Pipeline</h3>
               <p>
-                A configuration-driven MongoDB-to-relational pipeline that handles evolving schemas,
-                preserves tenant provenance and independently reconciles source and export counts.
+                A configuration-driven Python reference pipeline that normalizes evolving MongoDB-style
+                documents, preserves tenant provenance and independently reconciles source and export counts.
               </p>
               <div class="compact-actions">
                 <a href="https://github.com/ShabiLev/multi-tenant-data-quality-pipeline/blob/main/docs/PORTFOLIO_CASE_STUDY.md" target="_blank" rel="noopener noreferrer" aria-label="Read Multi-Tenant Data Quality Pipeline case study (opens in a new tab)">Case Study ↗</a>
@@ -323,7 +336,7 @@
             </p>
           </div>
           <dl class="metrics" aria-label="Verified career impact">
-            <div><dt>22+</dt><dd>Years in high-tech</dd></div>
+            <div><dt>20+</dt><dd>Years in high-tech</dd></div>
             <div><dt>10+</dt><dd>Years QA leadership</dd></div>
             <div><dt>20%</dt><dd>Cycle-time improvement</dd></div>
             <div><dt>40–50%</dt><dd>Defect / data error reduction</dd></div>
@@ -339,17 +352,27 @@
       </section>
 
       <section id="ai-engineering" class="section section-ai" aria-labelledby="ai-title">
-        <div class="shell ai-grid">
-          <div>
-            <p class="eyebrow">How I engineer with AI</p><h2 id="ai-title">AI-assisted engineering, governed like engineering</h2>
-            <p class="ai-copy">AI accelerates implementation. Verification, evidence and release gates establish trust.</p>
-            <blockquote>AI output is not evidence of completion.<strong>Completion requires evidence.</strong></blockquote>
+        <div class="shell">
+          <div class="section-heading ai-heading">
+            <div>
+              <p class="eyebrow">AI engineering &amp; prompt systems</p>
+              <h2 id="ai-title">AI-assisted engineering, governed like engineering</h2>
+            </div>
+            <p class="ai-copy">
+              I design AI-assisted engineering systems around explicit context, bounded specialist
+              roles, layered evaluation and evidence-based release decisions.
+            </p>
           </div>
-          <ol class="workflow" aria-label="Governed AI engineering workflow">
-            <li><span>01</span>Context</li><li><span>02</span>Plan</li><li><span>03</span>Specialist Agents</li
-            ><li><span>04</span>Build</li><li><span>05</span>Test</li><li><span>06</span>Independent Review</li
-            ><li><span>07</span>Evidence</li><li><span>08</span>Release</li>
+          <div class="ai-capabilities">
+            <article><span>01</span><h3>Prompt Engineering</h3><p>Structured prompt contracts with task, context, constraints, output formats, acceptance criteria and reusable versioned templates.</p></article>
+            <article><span>02</span><h3>Context Engineering</h3><p>Repository-aware, scoped and versionable context that preserves mission, risk, conventions and handoff boundaries.</p></article>
+            <article><span>03</span><h3>Agentic Engineering</h3><p>Conductor-led orchestration of bounded specialist roles, inspectable workflows and explicit human approval boundaries.</p></article>
+            <article><span>04</span><h3>Evaluation &amp; Governance</h3><p>Deterministic checks, evals, independent QA, evidence linked to artifacts and accountable release gates.</p></article>
+          </div>
+          <ol class="ai-flow" aria-label="Governed AI engineering flow">
+            <li>Prompt</li><li>Context</li><li>Agent / Team</li><li>Implementation</li><li>Evaluation</li><li>Independent QA</li><li>Evidence</li><li>Release</li>
           </ol>
+          <blockquote>Prompting gets work started. Engineering evidence gets it released.<strong>AI output is not evidence of completion.</strong></blockquote>
         </div>
       </section>
 
@@ -363,7 +386,7 @@
             <a class="button button-primary" href="https://www.linkedin.com/in/shabi-levanda/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="mailto:shabi231@gmail.com">Email Shabi</a>
             <a class="button button-secondary" href="https://github.com/ShabiLev" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="assets/cv/Shabi-Levanda-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="assets/cv/Shabi-Levanda-CV-EN.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
           </div>
         </div>
       </section>
