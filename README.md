@@ -4,15 +4,17 @@ Canonical source for Shabi Levanda's engineering-leadership portfolio.
 
 > Building reliable software delivery systems where AI speed meets engineering discipline.
 
-The portfolio positions Shabi as a **Quality & Release Engineering Leader** and **AI & Agentic Systems Builder**. It presents only claims supported by public repositories and makes evidence, constraints and release readiness visible.
+The portfolio positions Shabi as a **Quality & Release Engineering Leader** and **AI & Agentic Systems Builder**. Version 1.1 presents that position as a focused executive landing page with concise project depth, verified career evidence and a public-safe CWL Office case study.
 
 ## Architecture
 
 The site is intentionally static and dependency-light:
 
-- semantic `index.html`
+- authored English and Hebrew seven-section landing routes (`/` and `/he/`)
+- sanitized English and Hebrew CWL Office case studies
 - responsive `styles.css`
 - small progressive-enhancement `script.js`
+- repository-owned portrait, social image and verified two-page English CV
 - Python, pytest and Playwright quality gate
 - GitHub Actions CI against a repository-owned local server
 
@@ -38,7 +40,7 @@ In a second terminal with the virtual environment active:
 python -m pytest
 ```
 
-The suite owns a deterministic local server when `PORTFOLIO_BASE_URL` is not set. It verifies identity, all six projects, expected repository and supporting-document hrefs, navigation, anchors, resume truthfulness, semantic landmarks, axe accessibility, keyboard behavior, mobile navigation, five responsive viewports, 400% reflow equivalence, overflow, local resource loading, placeholder detection and public-safety patterns. External URL availability is reviewed separately so CI does not depend on third-party uptime.
+The suite owns a deterministic local server when `PORTFOLIO_BASE_URL` is not set. It verifies both languages and both case-study routes, RTL/LTR behavior, language switches, project links, CV delivery, structural spacing, axe WCAG checks, keyboard behavior, reduced motion, nine responsive widths, resource loading, internal links and recursive public-safety patterns. External URL availability is reviewed separately so CI does not depend on third-party uptime.
 
 ## CI
 
@@ -56,7 +58,8 @@ This release does not write to or deploy across repositories. Deployment require
 - Public project claims are sourced from public GitHub documentation.
 - No analytics, tracking, cookies, credentials, customer data or private repository content.
 - Release assets are scanned for placeholder and credential-like patterns.
-- The existing CV PDF is not copied because privacy review found a personal phone number and a malformed LinkedIn link. The site documents this release blocker honestly.
+- The v1.1 English CV is generated from an auditable repository-owned HTML source using verified historical/public facts and approved public contact channels. The source DOCX and phone number are excluded.
+- CWL Office is represented through a sanitized case study with no private repository link, source code, tenant information, production configuration or screenshots.
 - External links opened in a new tab use `noopener noreferrer`.
 
 ## Contribution and release workflow
@@ -68,4 +71,4 @@ This release does not write to or deploy across repositories. Deployment require
 5. Require green exact-head CI and independent review.
 6. Merge only after all gates pass; verify the deployed artifact separately.
 
-See [architecture](docs/ARCHITECTURE.md), [portfolio strategy](docs/PORTFOLIO_STRATEGY.md), [quality gate](docs/QUALITY_GATE.md) and [release process](docs/RELEASE.md).
+See [architecture](docs/ARCHITECTURE.md), [portfolio strategy](docs/PORTFOLIO_STRATEGY.md), [quality gate](docs/QUALITY_GATE.md), [CV provenance](docs/CV_PROVENANCE.md) and [release process](docs/RELEASE.md).

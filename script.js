@@ -1,49 +1,47 @@
-(() => {
-  const toggle = document.querySelector(".menu-toggle");
-  const navigation = document.querySelector("#primary-navigation");
-  const header = document.querySelector("[data-header]");
+const header = document.querySelector("[data-header]");
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const mobileNavigation = document.querySelector("[data-mobile-nav]");
+const desktopBreakpoint = window.matchMedia("(min-width: 1041px)");
 
-  const closeMenu = ({ restoreFocus = false } = {}) => {
-    if (!toggle || !navigation) return;
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.querySelector(".sr-only").textContent = "Open navigation";
-    navigation.classList.remove("open");
-    document.body.classList.remove("menu-open");
-    if (restoreFocus) toggle.focus();
-  };
+const setMenuState = (open, { restoreFocus = false } = {}) => {
+  if (!menuToggle || !mobileNavigation) return;
 
-  toggle?.addEventListener("click", () => {
-    const willOpen = toggle.getAttribute("aria-expanded") !== "true";
-    toggle.setAttribute("aria-expanded", String(willOpen));
-    toggle.querySelector(".sr-only").textContent = willOpen
-      ? "Close navigation"
-      : "Open navigation";
-    navigation.classList.toggle("open", willOpen);
-    document.body.classList.toggle("menu-open", willOpen);
-  });
+  menuToggle.setAttribute("aria-expanded", String(open));
+  const openLabel = menuToggle.dataset.menuOpenLabel || "Open navigation menu";
+  const closeLabel = menuToggle.dataset.menuCloseLabel || "Close navigation menu";
+  menuToggle.setAttribute("aria-label", open ? closeLabel : openLabel);
+  mobileNavigation.classList.toggle("open", open);
+  header?.classList.toggle("menu-active", open);
+  document.body.classList.toggle("menu-open", open);
 
-  navigation?.addEventListener("click", (event) => {
-    if (event.target.closest("a")) closeMenu();
-  });
+  if (restoreFocus) menuToggle.focus();
+};
 
-  const desktopViewport = window.matchMedia("(min-width: 761px)");
-  desktopViewport.addEventListener("change", (event) => {
-    if (event.matches) closeMenu();
-  });
+const updateHeader = () => {
+  header?.classList.toggle("scrolled", window.scrollY > 10);
+};
 
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key === "Escape" &&
-      toggle?.getAttribute("aria-expanded") === "true"
-    )
-      closeMenu({ restoreFocus: true });
-  });
+menuToggle?.addEventListener("click", () => {
+  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+  setMenuState(!isOpen);
+});
 
-  const onScroll = () =>
-    header?.classList.toggle("scrolled", window.scrollY > 12);
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+mobileNavigation?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuState(false));
+});
 
-  const year = document.querySelector("[data-year]");
-  if (year) year.textContent = String(new Date().getFullYear());
-})();
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
+    setMenuState(false, { restoreFocus: true });
+  }
+});
+
+desktopBreakpoint.addEventListener("change", (event) => {
+  if (event.matches) setMenuState(false);
+});
+
+window.addEventListener("scroll", updateHeader, { passive: true });
+updateHeader();
+
+const year = document.querySelector("[data-year]");
+if (year) year.textContent = String(new Date().getFullYear());

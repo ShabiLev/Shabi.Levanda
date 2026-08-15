@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CWL Office Case Study | Shabi Levanda</title>
+    <meta
+      name="description"
+      content="A public-safe engineering case study of CWL Office, a private-source multi-tenant operations and data workspace."
+    />
+    <meta name="theme-color" content="#090d12" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="alternate" hreflang="en" href="index.html" />
+    <link rel="alternate" hreflang="he" href="../../he/projects/cwl-office/" />
+    <link rel="alternate" hreflang="x-default" href="index.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="he_IL" />
+    <meta property="og:title" content="CWL Office Case Study | Shabi Levanda" />
+    <meta property="og:description" content="A public-safe case study of a private-source, read-only multi-tenant operations workspace." />
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../styles.css" />
+    <script src="../../script.js" defer></script>
+  </head>
+  <body class="case-study-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header" data-header>
+      <div class="header-inner">
+        <a class="brand" href="../../index.html#top" aria-label="Shabi Levanda portfolio, home">
+          <span class="brand-name">Shabi Levanda</span>
+          <span class="brand-role">Quality &amp; Release Engineering</span>
+        </a>
+        <div class="header-actions">
+          <nav class="language-switch" aria-label="Language selection"><a href="index.html" hreflang="en" aria-current="page">EN</a><span aria-hidden="true">|</span><a href="../../he/projects/cwl-office/" hreflang="he" lang="he" dir="rtl">עברית</a></nav>
+          <a class="icon-link" href="../../index.html#work">Selected Work</a>
+          <a class="button button-primary header-cv" href="../../assets/cv/Shabi-Levanda-CV-EN.pdf" download
+            ><span class="header-cv-label">Download </span>CV <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="case-study-header" aria-labelledby="case-study-title">
+        <div class="shell">
+          <a class="case-study-back" href="../../index.html#work">← Back to selected work</a>
+          <p class="eyebrow">Public-safe engineering case study</p>
+          <h1 id="case-study-title" class="case-study-title">CWL Office</h1>
+          <p class="case-study-lead">
+            A private-source, read-only operations workspace for exploring evolving multi-tenant data
+            through dynamic discovery, guarded queries and focused operational views.
+          </p>
+          <ul class="case-study-meta" aria-label="CWL Office metadata">
+            <li>Private Source</li><li>Active Engineering</li><li>Read-Only Architecture</li
+            ><li>Sanitized Case Study</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="shell case-study-layout">
+          <nav class="case-study-nav" aria-label="Case study sections">
+            <p>On this page</p>
+            <a href="#overview">Overview</a><a href="#challenge">Challenge</a
+            ><a href="#architecture">Architecture</a><a href="#capabilities">Capabilities</a
+            ><a href="#security">Security</a><a href="#quality">Quality Strategy</a
+            ><a href="#lessons">Lessons</a>
+          </nav>
+
+          <div class="case-study-content">
+            <section id="overview" aria-labelledby="overview-title">
+              <p class="eyebrow">01 · Overview</p>
+              <h2 id="overview-title">Operational clarity without write risk</h2>
+              <p>
+                CWL Office brings fragmented operational data into one focused workspace while keeping
+                the source repository, production configuration and customer information private. The
+                product is built around a simple constraint: operational exploration should be useful
+                without becoming another path for changing source data.
+              </p>
+              <div class="privacy-callout">
+                <strong>Confidentiality boundary</strong>
+                This case study intentionally contains no source code, tenant names, database or
+                collection names, production URLs, internal configuration, real records or screenshots.
+              </div>
+            </section>
+
+            <section id="challenge" aria-labelledby="challenge-title">
+              <p class="eyebrow">02 · Engineering challenge</p>
+              <h2 id="challenge-title">Design for data that refuses to stay still</h2>
+              <p>
+                Multi-tenant operational data evolves. Fields vary, BSON types are mixed, collections
+                differ and broad queries can become expensive. A hard-coded explorer becomes fragile;
+                unrestricted tooling creates privacy and write risk.
+              </p>
+              <div class="case-study-grid">
+                <article class="case-study-card"><h3>Schema evolution</h3><p>Discover structure at runtime and present unfamiliar data without guessing a fixed schema.</p></article>
+                <article class="case-study-card"><h3>Tenant context</h3><p>Keep provenance and navigation context explicit across focused and cross-tenant views.</p></article>
+                <article class="case-study-card"><h3>Query safety</h3><p>Bound expensive operations and keep data access deliberately read-only.</p></article>
+                <article class="case-study-card"><h3>Human usability</h3><p>Balance friendly operational views with deliberate access to raw document detail.</p></article>
+              </div>
+            </section>
+
+            <section id="architecture" aria-labelledby="architecture-title">
+              <p class="eyebrow">03 · Architecture</p>
+              <h2 id="architecture-title">Discovery and safeguards are part of the product</h2>
+              <p>
+                The architecture separates presentation, guarded server operations, discovery and the
+                database boundary. Configuration guides behavior, but the workspace validates what is
+                actually available instead of fabricating mappings.
+              </p>
+              <div class="architecture-flow" aria-label="Sanitized CWL Office architecture flow">
+                <div><span>01</span>User workspace</div>
+                <div><span>02</span>Guarded server routes</div>
+                <div><span>03</span>Dynamic discovery</div>
+                <div><span>04</span>Read-only data access</div>
+              </div>
+              <p>
+                The public description stays intentionally conceptual. Exact mappings, environment
+                configuration and deployment topology remain inside the private source boundary.
+              </p>
+            </section>
+
+            <section id="capabilities" aria-labelledby="capabilities-title">
+              <p class="eyebrow">04 · Key capabilities</p>
+              <h2 id="capabilities-title">A workspace that adapts to the data</h2>
+              <div class="case-study-grid">
+                <article class="case-study-card"><h3>Dynamic discovery</h3><p>Tenant, database, collection and field discovery based on the current authorized environment.</p></article>
+                <article class="case-study-card"><h3>Configurable browser</h3><p>Server-side filtering, sorting, pagination, selectable columns and schema-aware presentation.</p></article>
+                <article class="case-study-card"><h3>Focused operations</h3><p>Global search, bounded cross-tenant views and explicit empty, loading and error states.</p></article>
+                <article class="case-study-card"><h3>Guarded analysis</h3><p>A constrained aggregation workspace, sensitive-data masking and controlled export behavior.</p></article>
+              </div>
+            </section>
+
+            <section id="security" aria-labelledby="security-title">
+              <p class="eyebrow">05 · Security &amp; read-only design</p>
+              <h2 id="security-title">The safest write is the one the product cannot make</h2>
+              <p>
+                Read-only credentials and a read-only application contract reinforce each other. The
+                product exposes no create, update or delete workflow; write-capable aggregation stages
+                and unsafe query operators are rejected. Sensitive presentation is masked server-side,
+                and secrets remain outside source control.
+              </p>
+              <ul>
+                <li>Read-only database access and no mutation routes</li>
+                <li>Guarded operators, aggregation stages, concurrency and execution time</li>
+                <li>Server-side sensitive-data masking</li>
+                <li>No production data or internal configuration in public evidence</li>
+              </ul>
+            </section>
+
+            <section id="quality" aria-labelledby="quality-title">
+              <p class="eyebrow">06 · Quality strategy</p>
+              <h2 id="quality-title">Test the boundaries, not only the happy path</h2>
+              <p>
+                Quality coverage spans typed contracts, data normalization, guarded server behavior,
+                responsive presentation and real browser flows. The private product uses type checking,
+                unit and integration tests, Playwright end-to-end coverage, production builds and a
+                GitHub quality gate.
+              </p>
+              <div class="tag-list" aria-label="CWL Office technology and quality tools">
+                <span>Next.js</span><span>React</span><span>TypeScript</span><span>MongoDB</span
+                ><span>Zod</span><span>Vitest</span><span>Playwright</span><span>Docker</span>
+              </div>
+            </section>
+
+            <section id="lessons" aria-labelledby="lessons-title">
+              <p class="eyebrow">07 · Engineering lessons</p>
+              <h2 id="lessons-title">Make uncertainty explicit</h2>
+              <p>
+                Schema evolution, BSON normalization, provenance, query bounds and privacy are not UI
+                cleanup tasks. Treating them as architecture concerns produces a safer product and a
+                clearer operator experience.
+              </p>
+              <p>
+                The same rule applies to evidence: a public case study should demonstrate the
+                engineering model without exposing the private data that made the system necessary.
+              </p>
+              <a class="button button-primary" href="../../index.html#work">Return to selected work</a>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p><strong>CWL Office</strong><br />Public-safe case study · Private source</p>
+        <p>© <span data-year>2026</span> Shabi Levanda.</p>
+      </div>
+    </footer>
+  </body>
+</html>
