@@ -1,6 +1,6 @@
 # Stage 13.1 RC2 verification evidence
 
-Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Exact-head CI evidence is added to pull request #2 after the RC2 commits are pushed.
+Evidence recorded on 2026-08-15 for `feature/landing-page-v1.1`. Pull request #2 is the authoritative record for the final exact-head CI SHA and run URL.
 
 ## Automated gate
 
@@ -72,7 +72,7 @@ The 2026-08-15 live audit returned HTTP 200 for the GitHub profile and every lin
 
 ## Independent review
 
-Independent UI/UX/RTL, factual/AI, privacy and Senior QA re-reviews all issued GO after their findings were remediated. Senior QA independently confirmed 20.624pt page-2 footer clearance and 35 blank raster rows below the final content. Exact-head GitHub Actions is still required after push before the RC2 source gate can issue final GO.
+Independent UI/UX/RTL, factual/AI, privacy and Senior QA re-reviews all issued GO after their findings were remediated. Senior QA independently confirmed 20.624pt page-2 footer clearance and 35 blank raster rows below the final content. The PR source gate may issue GO only while GitHub Actions is successful on its exact current head.
 
 ## Remaining boundaries
 
