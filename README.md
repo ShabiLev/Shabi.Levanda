@@ -4,7 +4,7 @@ Canonical source for Shabi Levanda's engineering-leadership portfolio.
 
 > Building reliable software delivery systems where AI speed meets engineering discipline.
 
-The portfolio positions Shabi as a **Quality & Release Engineering Leader** and **AI & Agentic Systems Builder**. Version 1.1 presents that position as a focused executive landing page with concise project depth, verified career evidence and a public-safe CWL Office case study.
+Portfolio V2 positions Shabi as a **Quality, Release & Applied AI Engineering Leader**, with hands-on SQL, engineering analytics, automation and agentic workflows grounded in verified career and project evidence.
 
 ## Architecture
 
@@ -15,6 +15,8 @@ The site is intentionally static and dependency-light:
 - responsive `styles.css`
 - small progressive-enhancement `script.js`
 - repository-owned portrait, social image and verified two-page English CV
+- canonical claim registry in `data/verified-profile.json`
+- deterministic WeasyPrint CV generation and site/CV synchronization gates in `scripts/`
 - Python, pytest and Playwright quality gate
 - GitHub Actions CI against a repository-owned local server
 
@@ -37,6 +39,8 @@ Open `http://127.0.0.1:8080/`.
 In a second terminal with the virtual environment active:
 
 ```powershell
+python scripts/generate_cv_pdf.py
+python scripts/verify_profile_sync.py
 python -m pytest
 ```
 

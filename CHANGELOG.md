@@ -2,6 +2,27 @@
 
 All notable changes to the Shabi Levanda engineering portfolio are documented here.
 
+## [2.0.0] - 2026-08-28
+
+### Changed
+
+- Repositioned the portfolio around Quality, Release, Data/SQL/BI, Automation and Applied AI.
+- Reworked the four professional pillars and governed AI workflow without changing historical job titles.
+- Expanded the ATS-readable CV with operational SQL Server, Metabase, MongoDB, reconciliation and Python data-workflow evidence.
+- Replaced stale hard-coded experience counters with verified starting years.
+
+### Added
+
+- Canonical `data/verified-profile.json` claim registry with explicit publication exclusions.
+- Deterministic CV PDF generator with one cross-platform WeasyPrint engine.
+- Site/CV/PDF synchronization gate and PDF hyperlink validation.
+- CI regeneration and committed-PDF drift check.
+
+### Verification status
+
+- Static, privacy, PDF and synchronization checks pass locally.
+- Browser execution requires Chromium; GitHub Actions remains the required browser and accessibility gate.
+
 ## [1.1.0] - Release candidate
 
 ### Changed

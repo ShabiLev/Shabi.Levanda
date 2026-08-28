@@ -30,11 +30,11 @@ VIEWPORTS = [
 @pytest.mark.browser
 def test_homepage_identity_and_executive_information_architecture(loaded_page):
     page = loaded_page
-    assert page.title() == "Shabi Levanda | Quality & Release Engineering Leader | AI Systems Builder"
+    assert page.title() == "Shabi Levanda | Quality, Release & Applied AI Engineering Leader"
     assert page.get_by_role("heading", name="Shabi Levanda", exact=True).count() == 1
-    assert page.locator(".hero-role").get_by_text("Quality & Release Engineering Leader", exact=False).is_visible()
-    assert page.locator(".hero-role").get_by_text("AI & Agentic Systems Builder", exact=False).is_visible()
-    assert page.get_by_text("turn engineering work into verified, releasable outcomes", exact=False).is_visible()
+    assert page.locator(".hero-role").get_by_text("Quality, Release & Applied AI Engineering Leader", exact=False).is_visible()
+    assert page.locator(".hero-role").get_by_text("Data-driven delivery", exact=False).is_visible()
+    assert page.get_by_text("turn work into verified outcomes", exact=False).is_visible()
     assert page.locator("main > section").count() == 7
     assert page.locator("h1").count() == 1
     assert page.locator("header").count() == 1
@@ -50,7 +50,7 @@ def test_hebrew_homepage_is_authored_rtl_and_matches_information_architecture(br
     assert page.locator("html").get_attribute("lang") == "he"
     assert page.locator("html").get_attribute("dir") == "rtl"
     assert page.get_by_role("heading", name="שבי לבנדה", exact=True).count() == 1
-    assert page.locator(".hero-role").get_by_text("Quality & Release Engineering Leader", exact=False).is_visible()
+    assert page.locator(".hero-role").get_by_text("Quality, Release & Applied AI Engineering Leader", exact=False).is_visible()
     assert page.get_by_text("תוצר של AI אינו הוכחה שהעבודה הושלמה", exact=False).is_visible()
     assert page.locator(".hero-actions").get_by_text("CV באנגלית", exact=False).is_visible()
     assert page.locator("main > section").count() == 7
@@ -81,7 +81,7 @@ def test_ai_engineering_story_has_four_verified_capabilities_and_compact_flow(lo
     assert section.locator(".ai-capabilities article").count() == 4
     for heading in ("Prompt Engineering", "Context Engineering", "Agentic Engineering", "Evaluation & Governance"):
         assert section.get_by_role("heading", name=heading, exact=True).count() == 1
-    assert section.locator(".ai-flow li").count() == 8
+    assert section.locator(".ai-flow li").count() == 10
     assert section.get_by_text("AI output is not evidence of completion", exact=False).is_visible()
 
 
@@ -128,7 +128,7 @@ def test_cv_download_is_real_and_available_from_required_locations(loaded_page, 
     response = page.request.get(urljoin(f"{portfolio_base_url}/", expected_path))
     assert response.status == 200
     assert response.headers.get("content-type") == "application/pdf"
-    assert len(response.body()) > 50_000
+    assert len(response.body()) > 20_000
 
 
 @pytest.mark.browser

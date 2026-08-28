@@ -16,6 +16,10 @@ Browser
        -> portrait and social image
        -> cv/Shabi-Levanda-CV-EN.html (auditable source)
        -> cv/Shabi-Levanda-CV-EN.pdf (two-page download artifact)
+  -> data/verified-profile.json (canonical verified positioning and claim boundary)
+  -> scripts/generate_cv_pdf.py (reproducible PDF build)
+  -> scripts/verify_cv_reproduction.py (semantic PDF parity gate)
+  -> scripts/verify_profile_sync.py (site/CV consistency gate)
 ```
 
 ## Information architecture
@@ -25,9 +29,9 @@ The landing page has seven top-level content sections:
 1. Hero
 2. Selected Work
 3. More Projects
-4. About & Leadership
+4. About, Leadership & Four Professional Pillars
 5. Experience & Impact
-6. AI Engineering & Prompt Systems
+6. Applied AI & Agentic Engineering
 7. Contact
 
 The header and footer frame these sections. Deep technical detail stays in public repository documentation or the dedicated CWL Office case study.
