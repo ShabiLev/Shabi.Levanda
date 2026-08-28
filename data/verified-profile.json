@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "lastReviewed": "2026-08-28",
+  "positioning": {
+    "headline": "Quality, Release & Applied AI Engineering Leader",
+    "supportingLine": "Data-driven delivery · SQL & BI · Automation · Agentic Engineering",
+    "summary": "Senior technology and quality leader combining quality strategy, release governance, hands-on automation, operational data investigation and governed AI-assisted engineering across mobile, web, backend and enterprise systems."
+  },
+  "career": {
+    "startedYear": 2001,
+    "leadershipSinceYear": 2013,
+    "verifiedImpact": [
+      {"value": "20%", "label": "Development-cycle reduction", "source": "approved public CV"},
+      {"value": "40–50%", "label": "Defect / data-error reduction", "source": "approved public CV"}
+    ]
+  },
+  "pillars": [
+    {"name": "Quality Engineering & Leadership", "evidence": ["QA strategy", "risk-based testing", "people leadership", "mobile, web, API and backend quality"]},
+    {"name": "Release & Delivery Engineering", "evidence": ["release readiness", "traceability", "risk-based go/no-go decisions", "CI quality gates"]},
+    {"name": "Data, SQL & Engineering Analytics", "evidence": ["SQL Server operational analysis", "Metabase parameterized reporting", "MongoDB aggregation and schema discovery", "reconciliation and data-quality validation"]},
+    {"name": "Applied AI & Agentic Engineering", "evidence": ["prompt and context engineering", "specialist-agent orchestration", "independent QA", "evidence and human release gates"]}
+  ],
+  "competencies": {
+    "quality": ["QA strategy", "Quality engineering", "People leadership", "Agile / SDLC", "Release readiness", "Risk management"],
+    "automation": ["Python", "PyTest", "Selenium", "Playwright", "REST APIs", "Postman", "GitHub Actions", "CI/CD"],
+    "data": ["SQL Server", "T-SQL", "MongoDB", "Metabase", "Operational analytics", "Data investigation", "Data quality", "Reconciliation", "Excel / data automation"],
+    "appliedAi": ["Prompt engineering", "Context engineering", "Agentic engineering", "Multi-agent workflows", "AI-assisted SDLC", "AI quality and verification", "AI governance"]
+  },
+  "publicationRules": {
+    "excludedTitles": ["Data Engineer", "BI Developer", "Data Scientist", "ML Researcher", "AI Researcher"],
+    "unsupportedUntilFurtherEvidence": ["MySQL", "Jenkins", "Appium production ownership", "dashboard ownership"]
+  }
+}

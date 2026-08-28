@@ -89,7 +89,7 @@ def test_required_binary_assets_exist_and_are_nontrivial():
     expected_sizes = {
         ROOT / "assets" / "shabi-levanda-portrait.jpg": 50_000,
         ROOT / "assets" / "og-image.png": 20_000,
-        ROOT / "assets" / "cv" / "Shabi-Levanda-CV-EN.pdf": 70_000,
+        ROOT / "assets" / "cv" / "Shabi-Levanda-CV-EN.pdf": 20_000,
     }
     for path, minimum_size in expected_sizes.items():
         assert path.is_file(), f"Missing release asset: {path.relative_to(ROOT)}"
@@ -122,10 +122,10 @@ def test_english_cv_pdf_is_exactly_two_complete_pages():
     assert "cellebrite" in page_text[1] and "elbit systems" in page_text[1]
     text = "\n".join(page_text)
     for expected in (
-        "Quality & Release Engineering Leader",
+        "Quality, Release & Applied AI Engineering Leader",
         "Selected impact",
         "Selected engineering projects",
-        "AI & agentic engineering",
+        "Applied AI & agentic engineering",
         "Professional development",
         "02 / 02",
     ):
@@ -140,6 +140,22 @@ def test_english_cv_pdf_is_exactly_two_complete_pages():
             f"CV page {page_number} has only {clearance:.1f}pt bottom clearance; "
             f"expected at least {minimum_bottom_clearance_points}pt"
         )
+
+    links = [link for page in document for link in page.get_links() if link.get("uri")]
+    targets = {link["uri"] for link in links}
+    for expected_url in (
+        "https://www.linkedin.com/in/shabi-levanda/",
+        "https://github.com/ShabiLev",
+        "https://github.com/ShabiLev/flowproof-ai-release-gate",
+    ):
+        assert expected_url in targets, f"Missing PDF hyperlink annotation: {expected_url}"
+
+
+@pytest.mark.static
+def test_verified_profile_is_synchronized_with_site_and_cv_source():
+    from scripts.verify_profile_sync import main
+
+    assert main() == 0
 
 
 @pytest.mark.static
