@@ -17,7 +17,8 @@ Browser
        -> cv/Shabi-Levanda-CV-EN.html (auditable source)
        -> cv/Shabi-Levanda-CV-EN.pdf (two-page download artifact)
   -> data/verified-profile.json (canonical verified positioning and claim boundary)
-  -> scripts/generate_cv_pdf.py (deterministic PDF build)
+  -> scripts/generate_cv_pdf.py (reproducible PDF build)
+  -> scripts/verify_cv_reproduction.py (semantic PDF parity gate)
   -> scripts/verify_profile_sync.py (site/CV consistency gate)
 ```
 

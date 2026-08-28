@@ -16,7 +16,7 @@ The site is intentionally static and dependency-light:
 - small progressive-enhancement `script.js`
 - repository-owned portrait, social image and verified two-page English CV
 - canonical claim registry in `data/verified-profile.json`
-- deterministic CV generation and site/CV synchronization gates in `scripts/`
+- deterministic WeasyPrint CV generation and site/CV synchronization gates in `scripts/`
 - Python, pytest and Playwright quality gate
 - GitHub Actions CI against a repository-owned local server
 

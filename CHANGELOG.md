@@ -14,7 +14,7 @@ All notable changes to the Shabi Levanda engineering portfolio are documented he
 ### Added
 
 - Canonical `data/verified-profile.json` claim registry with explicit publication exclusions.
-- Deterministic CV PDF generator with Chromium and WeasyPrint fallback.
+- Deterministic CV PDF generator with one cross-platform WeasyPrint engine.
 - Site/CV/PDF synchronization gate and PDF hyperlink validation.
 - CI regeneration and committed-PDF drift check.
 
